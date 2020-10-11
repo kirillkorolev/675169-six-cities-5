@@ -8,13 +8,13 @@ import OfferScreen from "../offer-screen/offer-screen";
 
 const App = (props) => {
 
-  const {placesAmmount} = props;
+  const {offers, reviews} = props;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact>
-          <MainPage placesAmmount={placesAmmount} />
+          <MainPage offers={offers} />
         </Route>
         <Route path="/login" exact>
           <AuthScreen />
@@ -22,14 +22,24 @@ const App = (props) => {
         <Route path="/favorites" exact>
           <FavoritesScreen />
         </Route>
-        <Route path="/offer/:id?" exact component={OfferScreen}/>
+        {/* <Route path="/offer/:id?" exact component={OfferScreen} /> */}
+        <Route path="/offer" exact>
+          <OfferScreen offer={offers[0]} reviews={reviews}/>
+        </Route>
+
+        {/* <Route
+          render={() => (
+            <OfferScreen path="/offer/:id" offer={offers.id} reviews={reviews}/>
+          )}
+        /> */}
       </Switch>
     </BrowserRouter>
   );
 };
 
 App.propTypes = {
-  placesAmmount: PropTypes.number.isRequired,
+  offers: PropTypes.array.isRequired,
+  reviews: PropTypes.array.isRequired,
 };
 
 export default App;
