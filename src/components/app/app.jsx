@@ -8,7 +8,7 @@ import OfferScreen from "../offer-screen/offer-screen";
 
 const App = (props) => {
 
-  const {offers, reviews} = props;
+  const {offers} = props;
 
   return (
     <BrowserRouter>
@@ -22,16 +22,16 @@ const App = (props) => {
         <Route path="/favorites" exact>
           <FavoritesScreen />
         </Route>
-        {/* <Route path="/offer/:id?" exact component={OfferScreen} /> */}
-        <Route path="/offer" exact>
-          <OfferScreen offer={offers[0]} reviews={reviews}/>
-        </Route>
+        <Route
+          path="/offer/:id?"
+          exact
+          render={({match}) => {
+            const id = Number(match.params.id);
+            const offer = offers.find((offerItem) => offerItem.id === id);
 
-        {/* <Route
-          render={() => (
-            <OfferScreen path="/offer/:id" offer={offers.id} reviews={reviews}/>
-          )}
-        /> */}
+            return <OfferScreen offer={offer}/>;
+          }}
+        />
       </Switch>
     </BrowserRouter>
   );
@@ -39,7 +39,6 @@ const App = (props) => {
 
 App.propTypes = {
   offers: PropTypes.array.isRequired,
-  reviews: PropTypes.array.isRequired,
 };
 
 export default App;

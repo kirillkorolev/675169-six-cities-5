@@ -8,10 +8,10 @@ const OfferCard = (props) => {
 
   return (
     <article className="cities__place-card place-card">
-      {premium ?
+      {premium &&
         <div className="place-card__mark">
           <span>Premium</span>
-        </div> : <div></div>
+        </div>
       }
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">

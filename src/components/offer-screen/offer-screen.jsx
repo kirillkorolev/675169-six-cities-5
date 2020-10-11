@@ -3,10 +3,10 @@ import ReviewForm from "../review-form/review-form";
 import PropTypes from "prop-types";
 import ReviewsList from "../reviews-list/reviews-list";
 
-const OfferScreen = ({offer, reviews}) => {
+const OfferScreen = ({offer}) => {
 
   // const {offer} = props;
-  const {premium, price, title, type, raiting, bedroomsAmmount, ownerName, ownerPhoto, goods, guestsAmmount, photos} = offer;
+  const {premium, price, title, type, raiting, bedroomsAmmount, ownerName, ownerPhoto, goods, guestsAmmount, photos, reviews} = offer;
   // const {reviews} = reviews;
 
   return (
@@ -16,7 +16,7 @@ const OfferScreen = ({offer, reviews}) => {
           <div className="header__wrapper">
             <div className="header__left">
               <a className="header__logo-link" href="main.html">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
+                <img className="header__logo" src="../img/logo.svg" alt="6 cities logo" width="81" height="41"/>
               </a>
             </div>
             <nav className="header__nav">
@@ -40,7 +40,7 @@ const OfferScreen = ({offer, reviews}) => {
 
               {photos.map((photo, i) => (
                 <div className="property__image-wrapper" key={`${i}-${photo}`}>
-                  <img className="property__image" src={`${photo}`} alt="Photo studio"/>
+                  <img className="property__image" src={`../${photo}`} alt="Photo studio"/>
                 </div>
               ))}
 
@@ -121,7 +121,7 @@ const OfferScreen = ({offer, reviews}) => {
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                 <ul className="reviews__list">
 
-                  <ReviewsList reviews={reviews}/>
+                  <ReviewsList reviews={offer.reviews}/>
 
                 </ul>
 
@@ -139,7 +139,7 @@ const OfferScreen = ({offer, reviews}) => {
               <article className="near-places__card place-card">
                 <div className="near-places__image-wrapper place-card__image-wrapper">
                   <a href="#">
-                    <img className="place-card__image" src="img/room.jpg" width="260" height="200" alt="Place image"/>
+                    <img className="place-card__image" src="../img/room.jpg" width="260" height="200" alt="Place image"/>
                   </a>
                 </div>
                 <div className="place-card__info">
@@ -170,7 +170,7 @@ const OfferScreen = ({offer, reviews}) => {
               <article className="near-places__card place-card">
                 <div className="near-places__image-wrapper place-card__image-wrapper">
                   <a href="#">
-                    <img className="place-card__image" src="img/apartment-02.jpg" width="260" height="200" alt="Place image"/>
+                    <img className="place-card__image" src="../img/apartment-02.jpg" width="260" height="200" alt="Place image"/>
                   </a>
                 </div>
                 <div className="place-card__info">
@@ -201,7 +201,7 @@ const OfferScreen = ({offer, reviews}) => {
               <article className="near-places__card place-card">
                 <div className="near-places__image-wrapper place-card__image-wrapper">
                   <a href="#">
-                    <img className="place-card__image" src="img/apartment-03.jpg" width="260" height="200" alt="Place image"/>
+                    <img className="place-card__image" src="../img/apartment-03.jpg" width="260" height="200" alt="Place image"/>
                   </a>
                 </div>
                 <div className="place-card__info">
@@ -251,8 +251,8 @@ OfferScreen.propTypes = {
     ownerPhoto: PropTypes.string.isRequired,
     guestsAmmount: PropTypes.number.isRequired,
     photos: PropTypes.array.isRequired,
+    reviews: PropTypes.array.isRequired,
   }),
-  reviews: PropTypes.array.isRequired,
 };
 
 export default OfferScreen;
