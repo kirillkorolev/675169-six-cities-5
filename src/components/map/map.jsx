@@ -2,7 +2,7 @@ import React, {PureComponent} from "react";
 import leaflet from "leaflet";
 import PropTypes from "prop-types";
 import "leaflet/dist/leaflet.css";
-import {AmsterdamCoordinates, ZOOM} from "../../const.js";
+import {amsterdamCoordinates, ZOOM} from "../../const.js";
 
 class Map extends PureComponent {
   constructor(props) {
@@ -10,12 +10,12 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const city = AmsterdamCoordinates;
+    const city = amsterdamCoordinates;
     const zoom = ZOOM;
     const {offers} = this.props;
 
     const icon = leaflet.icon({
-      iconUrl: `img/pin.svg`,
+      iconUrl: `../img/pin.svg`,
       iconSize: [30, 30]
     });
 

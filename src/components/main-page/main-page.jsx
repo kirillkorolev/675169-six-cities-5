@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import OffersList from "../offers-list/offers-list";
 import Map from "../map/map";
 
+const placesClass = `cities__place-card`;
+
 const MainPage = (props) => {
 
   const {offers} = props;
@@ -91,7 +93,7 @@ const MainPage = (props) => {
               </form>
               <div className="cities__places-list places__list tabs__content">
 
-                <OffersList offers={offers}/>
+                <OffersList offers={offers} cardClass={placesClass}/>
 
               </div>
             </section>
