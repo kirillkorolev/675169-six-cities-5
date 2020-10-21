@@ -2,6 +2,7 @@ const AVATAR_URL = `https://api.adorable.io/avatars/128`;
 
 export default [
   {
+    coordinates: `52.3909553943508, 4.85309666406198`,
     id: 1,
     image: `img/apartment-01.jpg`,
     premium: true,
@@ -51,6 +52,7 @@ export default [
     ],
   },
   {
+    coordinates: `52.369553943508, 4.85309666406198`,
     id: 2,
     image: `img/apartment-02.jpg`,
     premium: false,
@@ -84,6 +86,7 @@ export default [
     ]
   },
   {
+    coordinates: `52.3909553943508, 4.929309666406198`,
     id: 3,
     image: `img/apartment-03.jpg`,
     premium: false,
@@ -109,6 +112,7 @@ export default [
     ]
   },
   {
+    coordinates: `52.3809553943508, 4.939309666406198`,
     id: 4,
     image: `img/apartment-01.jpg`,
     premium: true,
