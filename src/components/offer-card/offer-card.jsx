@@ -3,11 +3,13 @@ import PropTypes from "prop-types";
 
 const OfferCard = (props) => {
 
-  const {card} = props;
+  const {card, cardClass} = props;
   const {image, premium, price, title, type, raiting} = card;
 
+  const name = cardClass + ` place-card`;
+
   return (
-    <article className="cities__place-card place-card">
+    <article className={`${name}`}>
       {premium &&
         <div className="place-card__mark">
           <span>Premium</span>
@@ -54,7 +56,8 @@ OfferCard.propTypes = {
     type: PropTypes.string.isRequired,
     raiting: PropTypes.number.isRequired,
     premium: PropTypes.bool.isRequired,
-  })
+  }),
+  cardClass: PropTypes.string.isRequired,
 };
 
 export default OfferCard;

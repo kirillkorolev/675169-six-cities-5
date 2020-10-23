@@ -29,7 +29,9 @@ const App = (props) => {
             const id = Number(match.params.id);
             const offer = offers.find((offerItem) => offerItem.id === id);
 
-            return <OfferScreen offer={offer}/>;
+            const nearlyPlaces = offers.filter((item) => item.id !== id);
+
+            return <OfferScreen offer={offer} nearlyPlaces={nearlyPlaces}/>;
           }}
         />
       </Switch>
