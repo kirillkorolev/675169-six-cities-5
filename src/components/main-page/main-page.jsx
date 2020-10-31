@@ -1,13 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
 import OffersList from "../offers-list/offers-list";
+import CitiesList from "../cities-list/cities-list";
 import Map from "../map/map";
+
+import {connect} from "react-redux";
+import {ActionCreator} from "../../store/action";
 
 const placesClass = `cities__place-card`;
 
 const MainPage = (props) => {
 
-  const {offers} = props;
+  const {
+    offers,
+    city,
+    shownOffers,
+    changeCity,
+  } = props;
 
   return (
     <div className="page page--gray page--main">
@@ -37,45 +46,25 @@ const MainPage = (props) => {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
+
             <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
+
+              <CitiesList offers={offers} changeCity={changeCity}/>
+
             </ul>
+
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offers.length} places to stay in Amsterdam</b>
+
+              <b className="places__found">
+
+                {shownOffers.length} places to stay in {city}
+
+              </b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex="0">
@@ -93,14 +82,14 @@ const MainPage = (props) => {
               </form>
               <div className="cities__places-list places__list tabs__content">
 
-                <OffersList offers={offers} cardClass={placesClass}/>
+                <OffersList offers={shownOffers} cardClass={placesClass}/>
 
               </div>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
 
-                <Map offers={offers}/>
+                <Map offers={shownOffers}/>
 
               </section>
             </div>
@@ -113,6 +102,25 @@ const MainPage = (props) => {
 
 MainPage.propTypes = {
   offers: PropTypes.array.isRequired,
+  changeCity: PropTypes.func.isRequired,
+  city: PropTypes.string.isRequired,
+  shownOffers: PropTypes.array.isRequired,
 };
 
-export default MainPage;
+const mapStateToProps = (state) => ({
+  city: state.city,
+  shownOffers: state.offers.filter((it) => it.cityName === state.city),
+  offers: state.offers,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  changeCity(city) {
+    dispatch(ActionCreator.changeCity(city));
+  },
+  showOffers(offers, city) {
+    dispatch(ActionCreator.showOffers(offers, city));
+  }
+});
+
+export {MainPage};
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
