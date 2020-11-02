@@ -14,14 +14,14 @@ const activeClass = `tabs__item--active`;
 
 const CitiesList = (props) => {
 
-  const {changeCity, offers} = props;
+  const {changeCity, offers, city} = props;
   const citiesNames = getUniqueCityNames(offers);
 
   return (
     citiesNames.map((item, i) => (
 
       <li className="locations__item" key={item + i} >
-        <a className={`locations__item-link tabs__item  ${item === `Paris` ? activeClass : `` } ` } href="#"
+        <a className={`locations__item-link tabs__item  ${item === city ? activeClass : `` } ` } href="#"
           onClick = {(evt) => {
             evt.preventDefault();
             changeCity(item);
@@ -36,6 +36,8 @@ const CitiesList = (props) => {
 CitiesList.propTypes = {
   offers: PropTypes.array.isRequired,
   changeCity: PropTypes.func.isRequired,
+
+  city: PropTypes.string.isRequired,
 };
 
 export default CitiesList;

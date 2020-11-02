@@ -13,7 +13,7 @@ const MainPage = (props) => {
 
   const {
     offers,
-    city,
+    currentCity,
     shownOffers,
     changeCity,
   } = props;
@@ -49,7 +49,7 @@ const MainPage = (props) => {
 
             <ul className="locations__list tabs__list">
 
-              <CitiesList offers={offers} changeCity={changeCity}/>
+              <CitiesList offers={offers} changeCity={changeCity} city={currentCity}/>
 
             </ul>
 
@@ -62,7 +62,7 @@ const MainPage = (props) => {
 
               <b className="places__found">
 
-                {shownOffers.length} places to stay in {city}
+                {shownOffers.length} places to stay in {currentCity}
 
               </b>
               <form className="places__sorting" action="#" method="get">
@@ -103,23 +103,20 @@ const MainPage = (props) => {
 MainPage.propTypes = {
   offers: PropTypes.array.isRequired,
   changeCity: PropTypes.func.isRequired,
-  city: PropTypes.string.isRequired,
+  currentCity: PropTypes.string.isRequired,
   shownOffers: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  city: state.city,
-  shownOffers: state.offers.filter((it) => it.cityName === state.city),
+  currentCity: state.currentCity,
+  shownOffers: state.offers.filter((it) => it.cityName === state.currentCity),
   offers: state.offers,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeCity(city) {
-    dispatch(ActionCreator.changeCity(city));
+  changeCity(currentCity) {
+    dispatch(ActionCreator.changeCity(currentCity));
   },
-  showOffers(offers, city) {
-    dispatch(ActionCreator.showOffers(offers, city));
-  }
 });
 
 export {MainPage};

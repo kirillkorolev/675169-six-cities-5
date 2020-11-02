@@ -5,6 +5,16 @@ export default [
     cityName: `Amsterdam`,
     cityCoordinates: `[52.38333, 4.9]`,
     coordinates: `52.3909553943508, 4.85309666406198`,
+
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10
+      },
+      name: `Amsterdam`
+    },
+
     id: 1,
     image: `../img/apartment-01.jpg`,
     premium: true,
@@ -57,6 +67,16 @@ export default [
     cityName: `Amsterdam`,
     cityCoordinates: `[52.38333, 4.9]`,
     coordinates: `52.369553943508, 4.85309666406198`,
+
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10
+      },
+      name: `Amsterdam`
+    },
+
     id: 2,
     image: `../img/apartment-02.jpg`,
     premium: false,
@@ -93,6 +113,16 @@ export default [
     cityName: `Amsterdam`,
     cityCoordinates: `[52.38333, 4.9]`,
     coordinates: `52.3909553943508, 4.929309666406198`,
+
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10
+      },
+      name: `Amsterdam`
+    },
+
     id: 3,
     image: `../img/apartment-03.jpg`,
     premium: false,
@@ -121,6 +151,16 @@ export default [
     cityName: `Amsterdam`,
     cityCoordinates: `[52.38333, 4.9]`,
     coordinates: `52.3809553943508, 4.939309666406198`,
+
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10
+      },
+      name: `Amsterdam`
+    },
+
     id: 4,
     image: `../img/apartment-01.jpg`,
     premium: true,
@@ -165,6 +205,16 @@ export default [
   {
     cityName: `Paris`,
     cityCoordinates: `[52.38333, 4.9]`,
+
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10
+      },
+      name: `Amsterdam`
+    },
+
     coordinates: `52.3809553943508, 4.939309666406198`,
     id: 4,
     image: `../img/apartment-01.jpg`,
@@ -194,6 +244,16 @@ export default [
   {
     cityName: `Cologne`,
     cityCoordinates: `[52.38333, 4.9]`,
+
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10
+      },
+      name: `Amsterdam`
+    },
+
     coordinates: `52.3809553943508, 4.939309666406198`,
     id: 4,
     image: `../img/apartment-01.jpg`,
@@ -223,8 +283,18 @@ export default [
   {
     cityName: `Brussels`,
     cityCoordinates: `[52.38333, 4.9]`,
+
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10
+      },
+      name: `Amsterdam`
+    },
+
     coordinates: `52.3809553943508, 4.939309666406198`,
-    id: 4,
+    id: 14,
     image: `../img/apartment-01.jpg`,
     premium: true,
     price: 4000,
@@ -252,8 +322,18 @@ export default [
   {
     cityName: `Brussels`,
     cityCoordinates: `[52.38333, 4.9]`,
+
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10
+      },
+      name: `Amsterdam`
+    },
+
     coordinates: `52.3809553943508, 4.939309666406198`,
-    id: 4,
+    id: 24,
     image: `../img/apartment-01.jpg`,
     premium: true,
     price: 4000,
@@ -281,8 +361,18 @@ export default [
   {
     cityName: `Hamburg`,
     cityCoordinates: `[52.38333, 4.9]`,
+
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10
+      },
+      name: `Amsterdam`
+    },
+
     coordinates: `52.3809553943508, 4.939309666406198`,
-    id: 4,
+    id: 34,
     image: `../img/apartment-01.jpg`,
     premium: true,
     price: 4000,
@@ -310,8 +400,18 @@ export default [
   {
     cityName: `Dusseldorf`,
     cityCoordinates: `[52.38333, 4.9]`,
+
+    city: {
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10
+      },
+      name: `Amsterdam`
+    },
+
     coordinates: `52.3809553943508, 4.939309666406198`,
-    id: 4,
+    id: 44,
     image: `../img/apartment-01.jpg`,
     premium: true,
     price: 4000,

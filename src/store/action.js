@@ -8,9 +8,4 @@ export const ActionCreator = {
     type: ActionType.CHANGE_CITY,
     payload: cityName,
   }),
-
-  showOffers: (offers, cityName) => ({
-    type: ActionType.SHOW_OFFERS,
-    payload: offers.filter((item) => item.cityName === cityName),
-  }),
 };
