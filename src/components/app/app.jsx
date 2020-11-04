@@ -7,14 +7,16 @@ import FavoritesScreen from "../favorites-screen/favorites-screen";
 import OfferScreen from "../offer-screen/offer-screen";
 
 const App = (props) => {
-
+// const App = () => {
   const {offers} = props;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact>
-          <MainPage offers={offers} />
+          {/* <MainPage offers={offers}/> */}
+
+          <MainPage />
         </Route>
         <Route path="/login" exact>
           <AuthScreen />
