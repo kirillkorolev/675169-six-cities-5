@@ -3,20 +3,35 @@ import PropTypes from "prop-types";
 import OffersList from "../offers-list/offers-list";
 import CitiesList from "../cities-list/cities-list";
 import Map from "../map/map";
+import Sort from "../sort/sort";
 
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
 
+import {filterOffers} from "../../utils";
+
+
 const placesClass = `cities__place-card`;
+
+const getUniqueCityNames = (arr) => {
+  const uniqueNames = arr.map((item) => item.cityName);
+
+  return Array.from(new Set(uniqueNames));
+};
 
 const MainPage = (props) => {
 
   const {
-    offers,
     currentCity,
     shownOffers,
     changeCity,
+    uniqueCities,
+
+    filter,
+    sortOffers,
+    filteredOffers,
   } = props;
+  console.log(props);
 
   return (
     <div className="page page--gray page--main">
@@ -49,7 +64,7 @@ const MainPage = (props) => {
 
             <ul className="locations__list tabs__list">
 
-              <CitiesList offers={offers} changeCity={changeCity} city={currentCity}/>
+              <CitiesList citiesNames={uniqueCities} changeCity={changeCity} city={currentCity}/>
 
             </ul>
 
@@ -74,15 +89,12 @@ const MainPage = (props) => {
                   </svg>
                 </span>
                 <ul className="places__options places__options--custom places__options--opened">
-                  <li className="places__option places__option--active" tabIndex="0">Popular</li>
-                  <li className="places__option" tabIndex="0">Price: low to high</li>
-                  <li className="places__option" tabIndex="0">Price: high to low</li>
-                  <li className="places__option" tabIndex="0">Top rated first</li>
+                  <Sort filter={filter} sortOffers={sortOffers}/>
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
 
-                <OffersList offers={shownOffers} cardClass={placesClass}/>
+                <OffersList offers={filteredOffers} cardClass={placesClass}/>
 
               </div>
             </section>
@@ -101,22 +113,35 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  offers: PropTypes.array.isRequired,
   changeCity: PropTypes.func.isRequired,
   currentCity: PropTypes.string.isRequired,
   shownOffers: PropTypes.array.isRequired,
+
+  uniqueCities: PropTypes.array.isRequired,
+  filter: PropTypes.string.isRequired,
+  sortOffers: PropTypes.func.isRequired,
+
+  filteredOffers: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   currentCity: state.currentCity,
   shownOffers: state.offers.filter((it) => it.cityName === state.currentCity),
   offers: state.offers,
+  uniqueCities: getUniqueCityNames(state.offers),
+  filter: state.filter,
+
+  filteredOffers: filterOffers(state.filter, state.shownOffers),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   changeCity(currentCity) {
     dispatch(ActionCreator.changeCity(currentCity));
   },
+
+  sortOffers(filter) {
+    dispatch(ActionCreator.sortOffers(filter));
+  }
 });
 
 export {MainPage};

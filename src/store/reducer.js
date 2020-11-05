@@ -7,6 +7,10 @@ const initialState = {
   currentCity: `Amsterdam`,
   shownOffers: [],
   offers,
+  uniqueCities: [],
+
+  filter: `Popular`,
+  filteredOffers: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -15,6 +19,12 @@ const reducer = (state = initialState, action) => {
 
       return extend(state, {
         currentCity: action.payload,
+      });
+
+    case (ActionType.SORT_OFFERS):
+
+      return extend(state, {
+        filter: action.payload
       });
   }
 
