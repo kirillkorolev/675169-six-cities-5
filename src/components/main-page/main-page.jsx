@@ -31,7 +31,7 @@ const MainPage = (props) => {
     sortOffers,
     filteredOffers,
   } = props;
-  console.log(props);
+  // console.log(props);
 
   return (
     <div className="page page--gray page--main">
@@ -80,18 +80,9 @@ const MainPage = (props) => {
                 {shownOffers.length} places to stay in {currentCity}
 
               </b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex="0">
-                  Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"></use>
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <Sort filter={filter} sortOffers={sortOffers}/>
-                </ul>
-              </form>
+
+              <Sort filter={filter} sortOffers={sortOffers}/>
+
               <div className="cities__places-list places__list tabs__content">
 
                 <OffersList offers={filteredOffers} cardClass={placesClass}/>
