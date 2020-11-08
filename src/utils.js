@@ -5,7 +5,7 @@ export const extend = (a, b) => {
 };
 
 export const filterOffers = (filter, offers) => {
-  console.log(offers);
+
   switch (filter) {
     case types.POPULAR:
       offers = offers;

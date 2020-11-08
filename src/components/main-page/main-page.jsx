@@ -30,8 +30,11 @@ const MainPage = (props) => {
     filter,
     sortOffers,
     filteredOffers,
+    setBrightPin,
+    resetBrightPin,
+    hoveredId,
   } = props;
-  // console.log(props);
+
 
   return (
     <div className="page page--gray page--main">
@@ -85,14 +88,14 @@ const MainPage = (props) => {
 
               <div className="cities__places-list places__list tabs__content">
 
-                <OffersList offers={filteredOffers} cardClass={placesClass}/>
+                <OffersList offers={shownOffers} cardClass={placesClass} setBrightPin={setBrightPin} resetBrightPin={resetBrightPin}/>
 
               </div>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
 
-                <Map offers={shownOffers}/>
+                <Map offers={shownOffers} hoveredId={hoveredId}/>
 
               </section>
             </div>
@@ -113,6 +116,9 @@ MainPage.propTypes = {
   sortOffers: PropTypes.func.isRequired,
 
   filteredOffers: PropTypes.array.isRequired,
+  hoveredId: PropTypes.string.isRequired,
+  setBrightPin: PropTypes.func.isRequired,
+  resetBrightPin: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -123,6 +129,7 @@ const mapStateToProps = (state) => ({
   filter: state.filter,
 
   filteredOffers: filterOffers(state.filter, state.shownOffers),
+  hoveredId: state.hoveredId,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -132,7 +139,15 @@ const mapDispatchToProps = (dispatch) => ({
 
   sortOffers(filter) {
     dispatch(ActionCreator.sortOffers(filter));
-  }
+  },
+
+  setBrightPin(hoveredId) {
+    dispatch(ActionCreator.setBrightPin(hoveredId));
+  },
+
+  resetBrightPin() {
+    dispatch(ActionCreator.resetBrightPin());
+  },
 });
 
 export {MainPage};

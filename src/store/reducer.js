@@ -11,6 +11,7 @@ const initialState = {
 
   filter: `Popular`,
   filteredOffers: [],
+  hoveredId: `-1`,
 };
 
 const reducer = (state = initialState, action) => {
@@ -24,7 +25,19 @@ const reducer = (state = initialState, action) => {
     case (ActionType.SORT_OFFERS):
 
       return extend(state, {
-        filter: action.payload
+        filter: action.payload,
+      });
+
+    case (ActionType.SET_BRIGHT_PIN):
+
+      return extend(state, {
+        hoveredId: action.payload,
+      });
+
+    case (ActionType.RESET_BRIGHT_PIN):
+
+      return extend(state, {
+        hoveredId: action.payload,
       });
   }
 
