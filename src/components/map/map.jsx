@@ -2,7 +2,6 @@ import React, {PureComponent} from "react";
 import leaflet from "leaflet";
 import PropTypes from "prop-types";
 import "leaflet/dist/leaflet.css";
-// import {amsterdamCoordinates, ZOOM} from "../../const.js";
 
 class Map extends PureComponent {
   constructor(props) {
