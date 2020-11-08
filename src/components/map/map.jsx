@@ -19,12 +19,12 @@ class Map extends PureComponent {
 
 
     const icon = leaflet.icon({
-      iconUrl: `../img/pin.svg`,
+      iconUrl: `/img/pin.svg`,
       iconSize: [30, 30]
     });
 
     const brightIcon = leaflet.icon({
-      iconUrl: `../img/pin-active.svg`,
+      iconUrl: `/img/pin-active.svg`,
       iconSize: [30, 30]
     });
 
@@ -73,7 +73,7 @@ class Map extends PureComponent {
 
 Map.propTypes = {
   offers: PropTypes.array.isRequired,
-  hoveredId: PropTypes.number.isRequired,
+  hoveredId: PropTypes.string.isRequired,
 };
 
 export default Map;

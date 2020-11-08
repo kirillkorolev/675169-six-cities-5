@@ -64,7 +64,7 @@ OfferCard.propTypes = {
     type: PropTypes.string.isRequired,
     raiting: PropTypes.number.isRequired,
     premium: PropTypes.bool.isRequired,
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
   }),
   cardClass: PropTypes.string.isRequired,
   resetBrightPin: PropTypes.func.isRequired,
