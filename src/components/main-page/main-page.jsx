@@ -120,7 +120,6 @@ MainPage.propTypes = {
 const mapStateToProps = (state) => ({
   currentCity: state.currentCity,
   shownOffers: state.offers.filter((it) => it.cityName === state.currentCity),
-
   offers: state.offers,
   uniqueCities: getUniqueCityNames(state.offers),
   sortType: state.sortType,
