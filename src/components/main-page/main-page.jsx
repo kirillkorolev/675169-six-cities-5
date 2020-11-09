@@ -8,9 +8,6 @@ import Sort from "../sort/sort";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
 
-import {filterOffers} from "../../utils";
-
-
 const placesClass = `cities__place-card`;
 
 const getUniqueCityNames = (arr) => {
@@ -26,10 +23,8 @@ const MainPage = (props) => {
     shownOffers,
     changeCity,
     uniqueCities,
-
-    filter,
+    sortType,
     sortOffers,
-    filteredOffers,
     setBrightPin,
     resetBrightPin,
     hoveredId,
@@ -84,11 +79,13 @@ const MainPage = (props) => {
 
               </b>
 
-              <Sort filter={filter} sortOffers={sortOffers}/>
+              <Sort sortType={sortType} sortOffers={sortOffers} />
 
               <div className="cities__places-list places__list tabs__content">
 
-                <OffersList offers={shownOffers} cardClass={placesClass} setBrightPin={setBrightPin} resetBrightPin={resetBrightPin}/>
+                <OffersList offers={shownOffers} cardClass={placesClass} setBrightPin={setBrightPin} resetBrightPin={resetBrightPin}
+                  sortType={sortType}
+                />
 
               </div>
             </section>
@@ -112,10 +109,9 @@ MainPage.propTypes = {
   shownOffers: PropTypes.array.isRequired,
 
   uniqueCities: PropTypes.array.isRequired,
-  filter: PropTypes.string.isRequired,
+  sortType: PropTypes.string.isRequired,
   sortOffers: PropTypes.func.isRequired,
 
-  filteredOffers: PropTypes.array.isRequired,
   hoveredId: PropTypes.string.isRequired,
   setBrightPin: PropTypes.func.isRequired,
   resetBrightPin: PropTypes.func.isRequired,
@@ -124,11 +120,10 @@ MainPage.propTypes = {
 const mapStateToProps = (state) => ({
   currentCity: state.currentCity,
   shownOffers: state.offers.filter((it) => it.cityName === state.currentCity),
+
   offers: state.offers,
   uniqueCities: getUniqueCityNames(state.offers),
-  filter: state.filter,
-
-  filteredOffers: filterOffers(state.filter, state.shownOffers),
+  sortType: state.sortType,
   hoveredId: state.hoveredId,
 });
 

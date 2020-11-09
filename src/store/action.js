@@ -12,9 +12,9 @@ export const ActionCreator = {
     payload: cityName,
   }),
 
-  sortOffers: (filter) => ({
+  sortOffers: (sortType) => ({
     type: ActionType.SORT_OFFERS,
-    payload: filter,
+    payload: sortType,
   }),
 
   setBrightPin: (id) => ({
@@ -26,4 +26,9 @@ export const ActionCreator = {
     type: ActionType.RESET_BRIGHT_PIN,
     payload: `-1`,
   }),
+
+  setShownOffers: (shownOffers) => ({
+    type: ActionType.SET_SHOWN_OFFERS,
+    payload: shownOffers,
+  })
 };

@@ -17,7 +17,7 @@ export const filterOffers = (filter, offers) => {
       offers = offers.slice().sort((a, b) => b.price - a.price);
       break;
     case types.TOP_RATED:
-      offers = offers.slice().sort((a, b) => a.raiting - b.raiting);
+      offers = offers.slice().sort((a, b) => b.raiting - a.raiting);
       break;
   }
 

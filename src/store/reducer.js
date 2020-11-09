@@ -8,9 +8,7 @@ const initialState = {
   shownOffers: [],
   offers,
   uniqueCities: [],
-
-  filter: `Popular`,
-  filteredOffers: [],
+  sortType: `Popular`,
   hoveredId: `-1`,
 };
 
@@ -25,7 +23,7 @@ const reducer = (state = initialState, action) => {
     case (ActionType.SORT_OFFERS):
 
       return extend(state, {
-        filter: action.payload,
+        sortType: action.payload,
       });
 
     case (ActionType.SET_BRIGHT_PIN):

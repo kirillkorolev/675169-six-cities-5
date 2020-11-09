@@ -25,7 +25,7 @@ class Sort extends React.PureComponent {
 
 
   render() {
-    const {filter} = this.props;
+    const {sortType} = this.props;
 
     return (
       <form className="places__sorting" action="#" method="get">
@@ -33,14 +33,14 @@ class Sort extends React.PureComponent {
         <span className="places__sorting-type" tabIndex="0"
           onClick = {this.handleClick}
         >
-          {filter}
+          {sortType}
           <svg className="places__sorting-arrow" width="7" height="4">
             <use xlinkHref="#icon-arrow-select"></use>
           </svg>
         </span>
         <ul className={`places__options places__options--custom ${this.state.opened === true ? `places__options--opened` : ``}`}>
           {Object.values(types).map((item, i) => (
-            <li className={`places__option ${item === filter ? `places__option--active` : ``}`} key={item + i} tabIndex="0"
+            <li className={`places__option ${item === sortType ? `places__option--active` : ``}`} key={item + i} tabIndex="0"
               onClick = {() => {
                 this.sortOffers(item);
                 this.handleClick();
@@ -57,7 +57,7 @@ class Sort extends React.PureComponent {
 
 Sort.propTypes = {
   sortOffers: PropTypes.func.isRequired,
-  filter: PropTypes.string.isRequired,
+  sortType: PropTypes.string.isRequired,
 };
 
 export default Sort;
