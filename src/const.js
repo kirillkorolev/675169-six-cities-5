@@ -1,4 +1,12 @@
-export const amsterdamCoordinates = [52.38333, 4.9];
-export const ZOOM = 12;
-
 export const citiesList = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
+
+export const sortTypeList = [`Popular`, `Price: low to high`, `Price: high to low`, `Top rated first`];
+
+export const types = {
+  POPULAR: `Popular`,
+  LOW_TO_HIGH: `Price: low to high`,
+  HIGH_TO_LOW: `Price: high to low`,
+  TOP_RATED: `Top rated first`,
+};
+
+

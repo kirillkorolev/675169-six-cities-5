@@ -3,20 +3,33 @@ import PropTypes from "prop-types";
 import OffersList from "../offers-list/offers-list";
 import CitiesList from "../cities-list/cities-list";
 import Map from "../map/map";
+import Sort from "../sort/sort";
 
 import {connect} from "react-redux";
 import {ActionCreator} from "../../store/action";
 
 const placesClass = `cities__place-card`;
 
+const getUniqueCityNames = (arr) => {
+  const uniqueNames = arr.map((item) => item.cityName);
+
+  return Array.from(new Set(uniqueNames));
+};
+
 const MainPage = (props) => {
 
   const {
-    offers,
     currentCity,
     shownOffers,
     changeCity,
+    uniqueCities,
+    sortType,
+    sortOffers,
+    setBrightPin,
+    resetBrightPin,
+    hoveredId,
   } = props;
+
 
   return (
     <div className="page page--gray page--main">
@@ -49,7 +62,7 @@ const MainPage = (props) => {
 
             <ul className="locations__list tabs__list">
 
-              <CitiesList offers={offers} changeCity={changeCity} city={currentCity}/>
+              <CitiesList citiesNames={uniqueCities} changeCity={changeCity} city={currentCity}/>
 
             </ul>
 
@@ -65,31 +78,21 @@ const MainPage = (props) => {
                 {shownOffers.length} places to stay in {currentCity}
 
               </b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex="0">
-                  Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"></use>
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li className="places__option places__option--active" tabIndex="0">Popular</li>
-                  <li className="places__option" tabIndex="0">Price: low to high</li>
-                  <li className="places__option" tabIndex="0">Price: high to low</li>
-                  <li className="places__option" tabIndex="0">Top rated first</li>
-                </ul>
-              </form>
+
+              <Sort sortType={sortType} sortOffers={sortOffers} />
+
               <div className="cities__places-list places__list tabs__content">
 
-                <OffersList offers={shownOffers} cardClass={placesClass}/>
+                <OffersList offers={shownOffers} cardClass={placesClass} setBrightPin={setBrightPin} resetBrightPin={resetBrightPin}
+                  sortType={sortType}
+                />
 
               </div>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
 
-                <Map offers={shownOffers}/>
+                <Map offers={shownOffers} hoveredId={hoveredId}/>
 
               </section>
             </div>
@@ -101,21 +104,43 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = {
-  offers: PropTypes.array.isRequired,
   changeCity: PropTypes.func.isRequired,
   currentCity: PropTypes.string.isRequired,
   shownOffers: PropTypes.array.isRequired,
+
+  uniqueCities: PropTypes.array.isRequired,
+  sortType: PropTypes.string.isRequired,
+  sortOffers: PropTypes.func.isRequired,
+
+  hoveredId: PropTypes.string.isRequired,
+  setBrightPin: PropTypes.func.isRequired,
+  resetBrightPin: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   currentCity: state.currentCity,
   shownOffers: state.offers.filter((it) => it.cityName === state.currentCity),
   offers: state.offers,
+  uniqueCities: getUniqueCityNames(state.offers),
+  sortType: state.sortType,
+  hoveredId: state.hoveredId,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   changeCity(currentCity) {
     dispatch(ActionCreator.changeCity(currentCity));
+  },
+
+  sortOffers(filter) {
+    dispatch(ActionCreator.sortOffers(filter));
+  },
+
+  setBrightPin(hoveredId) {
+    dispatch(ActionCreator.setBrightPin(hoveredId));
+  },
+
+  resetBrightPin() {
+    dispatch(ActionCreator.resetBrightPin());
   },
 });
 

@@ -3,13 +3,21 @@ import PropTypes from "prop-types";
 
 const OfferCard = (props) => {
 
-  const {card, cardClass} = props;
-  const {image, premium, price, title, type, raiting} = card;
+  const {card, cardClass, setBrightPin, resetBrightPin} = props;
+  const {id, image, premium, price, title, type, raiting} = card;
 
   const name = cardClass + ` place-card`;
 
   return (
-    <article className={`${name}`}>
+    <article className={`${name}`}
+      onMouseEnter = {() => {
+        setBrightPin(id);
+      }}
+
+      onMouseLeave = {() => {
+        resetBrightPin();
+      }}
+    >
       {premium &&
         <div className="place-card__mark">
           <span>Premium</span>
@@ -56,8 +64,11 @@ OfferCard.propTypes = {
     type: PropTypes.string.isRequired,
     raiting: PropTypes.number.isRequired,
     premium: PropTypes.bool.isRequired,
+    id: PropTypes.string.isRequired,
   }),
   cardClass: PropTypes.string.isRequired,
+  resetBrightPin: PropTypes.func.isRequired,
+  setBrightPin: PropTypes.func.isRequired,
 };
 
 export default OfferCard;

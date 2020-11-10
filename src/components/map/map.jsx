@@ -2,7 +2,6 @@ import React, {PureComponent} from "react";
 import leaflet from "leaflet";
 import PropTypes from "prop-types";
 import "leaflet/dist/leaflet.css";
-// import {amsterdamCoordinates, ZOOM} from "../../const.js";
 
 class Map extends PureComponent {
   constructor(props) {
@@ -13,12 +12,19 @@ class Map extends PureComponent {
     const {offers} = this.props;
     const {city} = offers[0];
 
+    const {hoveredId} = this.props;
+
     const zoom = city.location.zoom;
     const coordinates = [city.location.latitude, city.location.longitude];
 
 
     const icon = leaflet.icon({
-      iconUrl: `../img/pin.svg`,
+      iconUrl: `/img/pin.svg`,
+      iconSize: [30, 30]
+    });
+
+    const brightIcon = leaflet.icon({
+      iconUrl: `/img/pin-active.svg`,
       iconSize: [30, 30]
     });
 
@@ -39,7 +45,12 @@ class Map extends PureComponent {
 
     offers.forEach((item) => {
       const array = item.coordinates.split(`,`);
-      leaflet.marker([array[0], array[1]], {icon}).addTo(this.map);
+
+      if (item.id === hoveredId) {
+        leaflet.marker([array[0], array[1]], {brightIcon}).addTo(this.map);
+      } else {
+        leaflet.marker([array[0], array[1]], {icon}).addTo(this.map);
+      }
     });
   }
 
@@ -48,7 +59,6 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate() {
-
     this.map.remove();
     this._create();
   }
@@ -62,7 +72,8 @@ class Map extends PureComponent {
 
 
 Map.propTypes = {
-  offers: PropTypes.array.isRequired
+  offers: PropTypes.array.isRequired,
+  hoveredId: PropTypes.string.isRequired,
 };
 
 export default Map;

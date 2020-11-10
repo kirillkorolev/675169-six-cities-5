@@ -15,7 +15,7 @@ export default [
       name: `Amsterdam`
     },
 
-    id: 1,
+    id: `1`,
     image: `../img/apartment-01.jpg`,
     premium: true,
     price: 1000,
@@ -77,7 +77,7 @@ export default [
       name: `Amsterdam`
     },
 
-    id: 2,
+    id: `2`,
     image: `../img/apartment-02.jpg`,
     premium: false,
     price: 2000,
@@ -123,7 +123,7 @@ export default [
       name: `Amsterdam`
     },
 
-    id: 3,
+    id: `3`,
     image: `../img/apartment-03.jpg`,
     premium: false,
     price: 3000,
@@ -161,7 +161,7 @@ export default [
       name: `Amsterdam`
     },
 
-    id: 4,
+    id: `4`,
     image: `../img/apartment-01.jpg`,
     premium: true,
     price: 4000,
@@ -216,7 +216,7 @@ export default [
     },
 
     coordinates: `52.3809553943508, 4.939309666406198`,
-    id: 4,
+    id: `554`,
     image: `../img/apartment-01.jpg`,
     premium: true,
     price: 4000,
@@ -255,7 +255,7 @@ export default [
     },
 
     coordinates: `52.3809553943508, 4.939309666406198`,
-    id: 4,
+    id: `4566`,
     image: `../img/apartment-01.jpg`,
     premium: true,
     price: 4000,
@@ -294,7 +294,7 @@ export default [
     },
 
     coordinates: `52.3809553943508, 4.939309666406198`,
-    id: 14,
+    id: `14`,
     image: `../img/apartment-01.jpg`,
     premium: true,
     price: 4000,
@@ -333,7 +333,7 @@ export default [
     },
 
     coordinates: `52.3809553943508, 4.939309666406198`,
-    id: 24,
+    id: `24`,
     image: `../img/apartment-01.jpg`,
     premium: true,
     price: 4000,
@@ -372,7 +372,7 @@ export default [
     },
 
     coordinates: `52.3809553943508, 4.939309666406198`,
-    id: 34,
+    id: `34`,
     image: `../img/apartment-01.jpg`,
     premium: true,
     price: 4000,
@@ -411,7 +411,7 @@ export default [
     },
 
     coordinates: `52.3809553943508, 4.939309666406198`,
-    id: 44,
+    id: `44`,
     image: `../img/apartment-01.jpg`,
     premium: true,
     price: 4000,

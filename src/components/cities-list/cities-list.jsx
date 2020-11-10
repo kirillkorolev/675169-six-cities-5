@@ -1,21 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const getUniqueCityNames = (arr) => {
-  let uniqueNames = [];
-
-  arr.forEach((elem) => {
-    uniqueNames.push(elem.cityName);
-  });
-  return Array.from(new Set(uniqueNames));
-};
-
 const activeClass = `tabs__item--active`;
 
 const CitiesList = (props) => {
-
-  const {changeCity, offers, city} = props;
-  const citiesNames = getUniqueCityNames(offers);
+  const {changeCity, citiesNames, city} = props;
+  // const citiesNames = getUniqueCityNames(offers);
 
   return (
     citiesNames.map((item, i) => (
@@ -34,7 +24,7 @@ const CitiesList = (props) => {
 };
 
 CitiesList.propTypes = {
-  offers: PropTypes.array.isRequired,
+  citiesNames: PropTypes.array.isRequired,
   changeCity: PropTypes.func.isRequired,
 
   city: PropTypes.string.isRequired,
