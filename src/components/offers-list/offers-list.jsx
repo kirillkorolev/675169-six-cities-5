@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import OfferCard from "../offer-card/offer-card";
 import {Link} from "react-router-dom";
 
-import {filterOffers} from "../../utils";
+import {sortOffers} from "../../utils";
 
 const OffersList = (props) => {
   const {offers, cardClass, setBrightPin, resetBrightPin, sortType} = props;
 
-  let sortedOffers = filterOffers(sortType, offers);
+  let sortedOffers = sortOffers(sortType, offers);
 
   return (
     sortedOffers.map((card) => (

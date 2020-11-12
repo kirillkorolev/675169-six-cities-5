@@ -7,15 +7,13 @@ import FavoritesScreen from "../favorites-screen/favorites-screen";
 import OfferScreen from "../offer-screen/offer-screen";
 
 const App = (props) => {
-// const App = () => {
+
   const {offers} = props;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact>
-          {/* <MainPage offers={offers}/> */}
-
           <MainPage />
         </Route>
         <Route path="/login" exact>
@@ -28,10 +26,11 @@ const App = (props) => {
           path="/offer/:id?"
           exact
           render={({match}) => {
-            const id = Number(match.params.id);
+            const id = match.params.id;
             const offer = offers.find((offerItem) => offerItem.id === id);
 
-            const nearlyPlaces = offers.filter((item) => item.id !== id);
+
+            const nearlyPlaces = offers.filter((item) => item.cityName === offer.cityName);
 
             return <OfferScreen offer={offer} nearlyPlaces={nearlyPlaces}/>;
           }}

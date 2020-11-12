@@ -5,7 +5,6 @@ const activeClass = `tabs__item--active`;
 
 const CitiesList = (props) => {
   const {changeCity, citiesNames, city} = props;
-  // const citiesNames = getUniqueCityNames(offers);
 
   return (
     citiesNames.map((item, i) => (
