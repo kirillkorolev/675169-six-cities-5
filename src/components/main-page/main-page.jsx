@@ -13,6 +13,7 @@ import {ActionCreator} from "../../store/action";
 import withAciveItem from "../../hocs/with-active-item/with-active-item";
 
 import {citiesList} from "../../const";
+import MainEmpty from "../main-empty/main-empty";
 
 const placesClass = `cities__place-card`;
 
@@ -35,11 +36,12 @@ const MainPage = (props) => {
   return (
     <div className="page page--gray page--main">
       <Header />
-      <main className="page__main page__main--index">
+      <main
+        className={`page__main page__main--index ${shownOffers.length === 0 ? `page__main--index-empty` : `` }`}
+      >
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-
             <ul className="locations__list tabs__list">
 
               <CitiesList citiesNames={citiesList} changeCity={changeCity} city={currentCity}/>
@@ -49,36 +51,38 @@ const MainPage = (props) => {
           </section>
         </div>
         <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
+          {shownOffers.length === 0 ?
+            <MainEmpty currentCity={currentCity}/>
+            :
+            <div className="cities__places-container container">
+              <section className="cities__places places">
+                <h2 className="visually-hidden">Places</h2>
 
-              <b className="places__found">
+                <b className="places__found">
 
-                {shownOffers.length} places to stay in {currentCity}
+                  {shownOffers.length} places to stay in {currentCity}
 
-              </b>
+                </b>
 
-              {/* <Sort sortType={sortType} sortOffers={sortOffers} /> */}
+                <SortWrapped sortType={sortType} sortOffers={sortOffers} />
 
-              <SortWrapped sortType={sortType} sortOffers={sortOffers} />
+                <div className="cities__places-list places__list tabs__content">
 
-              <div className="cities__places-list places__list tabs__content">
+                  <OffersList offers={shownOffers} cardClass={placesClass} setBrightPin={setBrightPin} resetBrightPin={resetBrightPin}
+                    sortType={sortType}
+                  />
 
-                <OffersList offers={shownOffers} cardClass={placesClass} setBrightPin={setBrightPin} resetBrightPin={resetBrightPin}
-                  sortType={sortType}
-                />
-
-              </div>
-            </section>
-            <div className="cities__right-section">
-              <section className="cities__map map">
-
-                <Map offers={shownOffers} hoveredId={hoveredId}/>
-
+                </div>
               </section>
+              <div className="cities__right-section">
+                <section className="cities__map map">
+
+                  <Map offers={shownOffers} hoveredId={hoveredId}/>
+
+                </section>
+              </div>
             </div>
-          </div>
+          }
         </div>
       </main>
     </div>
