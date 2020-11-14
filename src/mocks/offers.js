@@ -398,7 +398,7 @@ export default [
   },
 
   {
-    cityName: `Dusseldorf`,
+    cityName: `Paris`,
     cityCoordinates: `[52.38333, 4.9]`,
 
     city: {
