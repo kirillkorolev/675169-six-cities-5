@@ -10,6 +10,7 @@ const App = (props) => {
 
   const {offers} = props;
 
+
   return (
     <BrowserRouter>
       <Switch>

@@ -9,4 +9,7 @@ export const types = {
   TOP_RATED: `Top rated first`,
 };
 
-
+export const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};

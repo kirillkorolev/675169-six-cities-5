@@ -7,31 +7,31 @@ import CitiesList from "../cities-list/cities-list";
 import Map from "../map/map";
 import Sort from "../sort/sort";
 import Header from "../header/header";
+import MainEmpty from "../main-empty/main-empty";
 
-import {ActionCreator} from "../../store/action";
+// import {ActionCreator} from "../../store/action";
+
+import {changeCity, sortOffers, setBrightPin, resetBrightPin} from "../../store/action";
 
 import withAciveItem from "../../hocs/with-active-item/with-active-item";
-
 import {citiesList} from "../../const";
-import MainEmpty from "../main-empty/main-empty";
+
 
 const placesClass = `cities__place-card`;
 
 const SortWrapped = withAciveItem(Sort);
 
 const MainPage = (props) => {
-
   const {
     currentCity,
     shownOffers,
-    changeCity,
+    changeCityAction,
     sortType,
-    sortOffers,
-    setBrightPin,
-    resetBrightPin,
+    sortOffersAction,
+    setBrightPinAction,
+    resetBrightPinAction,
     hoveredId,
   } = props;
-
 
   return (
     <div className="page page--gray page--main">
@@ -44,7 +44,7 @@ const MainPage = (props) => {
           <section className="locations container">
             <ul className="locations__list tabs__list">
 
-              <CitiesList citiesNames={citiesList} changeCity={changeCity} city={currentCity}/>
+              <CitiesList citiesNames={citiesList} changeCity={changeCityAction} city={currentCity}/>
 
             </ul>
 
@@ -64,11 +64,11 @@ const MainPage = (props) => {
 
                 </b>
 
-                <SortWrapped sortType={sortType} sortOffers={sortOffers} />
+                <SortWrapped sortType={sortType} sortOffers={sortOffersAction} />
 
                 <div className="cities__places-list places__list tabs__content">
 
-                  <OffersList offers={shownOffers} cardClass={placesClass} setBrightPin={setBrightPin} resetBrightPin={resetBrightPin}
+                  <OffersList offers={shownOffers} cardClass={placesClass} setBrightPin={setBrightPinAction} resetBrightPin={resetBrightPinAction}
                     sortType={sortType}
                   />
 
@@ -89,42 +89,57 @@ const MainPage = (props) => {
   );
 };
 
+// import {createSelector} from "reselect";
+
+// import {NameSpace} from "../../store/reducers/root-reducer";
+
+// export const getOffers = (state) => {
+//   return state[NameSpace.DATA].offers;
+// };
+
+// export const getOffersByCity = createSelector(
+//     getOffers,
+//     (offers) => {
+//       return offers.filter((it) => it.city.name === `genre`);
+//     }
+// );
+
 MainPage.propTypes = {
-  changeCity: PropTypes.func.isRequired,
+  changeCityAction: PropTypes.func.isRequired,
   currentCity: PropTypes.string.isRequired,
   shownOffers: PropTypes.array.isRequired,
 
   sortType: PropTypes.string.isRequired,
-  sortOffers: PropTypes.func.isRequired,
+  sortOffersAction: PropTypes.func.isRequired,
 
   hoveredId: PropTypes.string.isRequired,
-  setBrightPin: PropTypes.func.isRequired,
-  resetBrightPin: PropTypes.func.isRequired,
+  setBrightPinAction: PropTypes.func.isRequired,
+  resetBrightPinAction: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  currentCity: state.currentCity,
-  shownOffers: state.offers.filter((it) => it.cityName === state.currentCity),
-  offers: state.offers,
-  sortType: state.sortType,
-  hoveredId: state.hoveredId,
+const mapStateToProps = ({DATA, PROCESS}) => ({
+  currentCity: PROCESS.currentCity,
+  shownOffers: DATA.offers.filter((it) => it.cityName === PROCESS.currentCity),
+  offers: DATA.offers,
+  sortType: PROCESS.sortType,
+  hoveredId: PROCESS.hoveredId,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  changeCity(currentCity) {
-    dispatch(ActionCreator.changeCity(currentCity));
+  changeCityAction(currentCity) {
+    dispatch(changeCity(currentCity));
   },
 
-  sortOffers(filter) {
-    dispatch(ActionCreator.sortOffers(filter));
+  sortOffersAction(filter) {
+    dispatch(sortOffers(filter));
   },
 
-  setBrightPin(hoveredId) {
-    dispatch(ActionCreator.setBrightPin(hoveredId));
+  setBrightPinAction(hoveredId) {
+    dispatch(setBrightPin(hoveredId));
   },
 
-  resetBrightPin() {
-    dispatch(ActionCreator.resetBrightPin());
+  resetBrightPinAction() {
+    dispatch(resetBrightPin());
   },
 });
 
