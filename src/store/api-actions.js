@@ -1,9 +1,12 @@
 import {loadOffers, requireAuthorization} from "./action";
 import {AuthorizationStatus} from "../const";
+import {transformOffer} from "../utils";
 
 export const fetchHotelsList = () => (dispatch, _getState, api) => (
   api.get(`/hotels`)
-    .then(({data}) => dispatch(loadOffers(data)))
+    .then(({data}) => dispatch(loadOffers(
+        data.map((it) => transformOffer(it))
+    )))
 );
 
 export const checkAuth = () => (dispatch, _getState, api) => (

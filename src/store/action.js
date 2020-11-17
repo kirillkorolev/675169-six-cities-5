@@ -7,39 +7,6 @@ export const ActionType = {
   LOAD_OFFERS: `LOAD_OFFERS`,
 };
 
-// export const ActionCreator = {
-//   changeCity: (cityName) => ({
-//     type: ActionType.CHANGE_CITY,
-//     payload: cityName,
-//   }),
-
-//   sortOffers: (sortType) => ({
-//     type: ActionType.SORT_OFFERS,
-//     payload: sortType,
-//   }),
-
-//   setBrightPin: (id) => ({
-//     type: ActionType.SET_BRIGHT_PIN,
-//     payload: id,
-//   }),
-
-//   resetBrightPin: () => ({
-//     type: ActionType.RESET_BRIGHT_PIN,
-//     payload: `-1`,
-//   }),
-
-//   requireAuthorization: (status) => ({
-//     type: ActionType.REQUIRED_AUTHORIZATION,
-//     payload: status,
-//   }),
-
-//   loadOffers: (offers) => ({
-//     type: ActionType.LOAD_OFFERS,
-//     payload: offers,
-//   }),
-// };
-
-
 export const changeCity = (cityName) => ({
   type: ActionType.CHANGE_CITY,
   payload: cityName,

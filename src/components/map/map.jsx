@@ -9,14 +9,8 @@ class Map extends PureComponent {
   }
 
   _create() {
-    const {offers} = this.props;
-    const {city} = offers[0];
-
-    const {hoveredId} = this.props;
-
-    const zoom = city.location.zoom;
-    const coordinates = [city.location.latitude, city.location.longitude];
-
+    const {offers, hoveredId} = this.props;
+    const {cityLatitude, cityLongitude, cityZoom} = offers[0];
 
     const icon = leaflet.icon({
       iconUrl: `/img/pin.svg`,
@@ -29,13 +23,13 @@ class Map extends PureComponent {
     });
 
     this.map = leaflet.map(`map`, {
-      center: coordinates,
-      zoom,
+      center: [cityLatitude, cityLongitude],
+      zoom: cityZoom,
       zoomControl: false,
       marker: true
     });
 
-    this.map.setView(coordinates, zoom);
+    this.map.setView([cityLatitude, cityLongitude], cityZoom);
 
     leaflet
     .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -44,12 +38,11 @@ class Map extends PureComponent {
     .addTo(this.map);
 
     offers.forEach((item) => {
-      const array = item.coordinates.split(`,`);
 
       if (item.id === hoveredId) {
-        leaflet.marker([array[0], array[1]], {brightIcon}).addTo(this.map);
+        leaflet.marker([item.offerLatitude, item.offerLongitude], {brightIcon}).addTo(this.map);
       } else {
-        leaflet.marker([array[0], array[1]], {icon}).addTo(this.map);
+        leaflet.marker([item.offerLatitude, item.offerLongitude], {icon}).addTo(this.map);
       }
     });
   }
@@ -73,7 +66,7 @@ class Map extends PureComponent {
 
 Map.propTypes = {
   offers: PropTypes.array.isRequired,
-  hoveredId: PropTypes.string.isRequired,
+  hoveredId: PropTypes.number.isRequired,
 };
 
 export default Map;

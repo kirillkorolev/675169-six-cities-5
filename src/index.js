@@ -32,8 +32,6 @@ const store = createStore(
     )
 );
 
-console.log(store);
-
 store.dispatch(fetchHotelsList());
 store.dispatch(checkAuth());
 

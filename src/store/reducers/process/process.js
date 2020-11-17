@@ -5,7 +5,7 @@ const initialState = {
   currentCity: `Amsterdam`,
   shownOffers: [],
   sortType: `Popular`,
-  hoveredId: `-1`,
+  hoveredId: -1,
 };
 
 

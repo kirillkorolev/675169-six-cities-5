@@ -9,19 +9,20 @@ import Sort from "../sort/sort";
 import Header from "../header/header";
 import MainEmpty from "../main-empty/main-empty";
 
-// import {ActionCreator} from "../../store/action";
-
 import {changeCity, sortOffers, setBrightPin, resetBrightPin} from "../../store/action";
 
 import withAciveItem from "../../hocs/with-active-item/with-active-item";
 import {citiesList} from "../../const";
 
+import {getOffers} from "../../store/reducers/offers-data/selectors";
+import {getCurrentCity, getSortType, getHoveredId, getShownOffers} from "../../store/reducers/process/selectors";
 
 const placesClass = `cities__place-card`;
 
 const SortWrapped = withAciveItem(Sort);
 
 const MainPage = (props) => {
+
   const {
     currentCity,
     shownOffers,
@@ -89,20 +90,6 @@ const MainPage = (props) => {
   );
 };
 
-// import {createSelector} from "reselect";
-
-// import {NameSpace} from "../../store/reducers/root-reducer";
-
-// export const getOffers = (state) => {
-//   return state[NameSpace.DATA].offers;
-// };
-
-// export const getOffersByCity = createSelector(
-//     getOffers,
-//     (offers) => {
-//       return offers.filter((it) => it.city.name === `genre`);
-//     }
-// );
 
 MainPage.propTypes = {
   changeCityAction: PropTypes.func.isRequired,
@@ -112,17 +99,19 @@ MainPage.propTypes = {
   sortType: PropTypes.string.isRequired,
   sortOffersAction: PropTypes.func.isRequired,
 
-  hoveredId: PropTypes.string.isRequired,
+  hoveredId: PropTypes.number.isRequired,
   setBrightPinAction: PropTypes.func.isRequired,
   resetBrightPinAction: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = ({DATA, PROCESS}) => ({
-  currentCity: PROCESS.currentCity,
-  shownOffers: DATA.offers.filter((it) => it.cityName === PROCESS.currentCity),
-  offers: DATA.offers,
-  sortType: PROCESS.sortType,
-  hoveredId: PROCESS.hoveredId,
+const mapStateToProps = (state) => ({
+  offers: getOffers(state),
+
+  currentCity: getCurrentCity(state),
+  shownOffers: getShownOffers(state),
+
+  sortType: getSortType(state),
+  hoveredId: getHoveredId(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
