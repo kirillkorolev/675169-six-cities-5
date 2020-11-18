@@ -40,7 +40,7 @@ class Map extends PureComponent {
     offers.forEach((item) => {
 
       if (item.id === hoveredId) {
-        leaflet.marker([item.offerLatitude, item.offerLongitude], {brightIcon}).addTo(this.map);
+        leaflet.marker([item.offerLatitude, item.offerLongitude], {icon: brightIcon}).addTo(this.map);
       } else {
         leaflet.marker([item.offerLatitude, item.offerLongitude], {icon}).addTo(this.map);
       }
