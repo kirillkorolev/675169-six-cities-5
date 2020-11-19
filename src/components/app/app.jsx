@@ -6,9 +6,15 @@ import AuthScreen from "../auth-screen/auth-screen";
 import FavoritesScreen from "../favorites-screen/favorites-screen";
 import OfferScreen from "../offer-screen/offer-screen";
 
+import {connect} from "react-redux";
+import {getOffers} from "../../store/reducers/offers-data/selectors";
+
+import {getShownOffers} from "../../store/reducers/process/selectors";
+
 const App = (props) => {
 
-  const {offers} = props;
+  const {offers, shownOffers} = props;
+
 
   return (
     <BrowserRouter>
@@ -27,12 +33,13 @@ const App = (props) => {
           exact
           render={({match}) => {
             const id = match.params.id;
+
             const offer = offers.find((offerItem) => offerItem.id === id);
 
 
-            const nearlyPlaces = offers.filter((item) => item.cityName === offer.cityName);
+            // const nearlyPlaces = offers.filter((item) => item.cityName === offer.cityName);
 
-            return <OfferScreen offer={offer} nearlyPlaces={nearlyPlaces}/>;
+            return <OfferScreen offer={offer} nearlyPlaces={shownOffers}/>;
           }}
         />
       </Switch>
@@ -40,8 +47,15 @@ const App = (props) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  offers: getOffers(state),
+  shownOffers: getShownOffers(state),
+});
+
 App.propTypes = {
   offers: PropTypes.array.isRequired,
+  shownOffers: PropTypes.array.isRequired,
 };
 
-export default App;
+export {App};
+export default connect(mapStateToProps)(App);

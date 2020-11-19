@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const OfferCard = (props) => {
 
   const {card, cardClass, setBrightPin, resetBrightPin} = props;
-  const {id, image, premium, price, title, type, raiting} = card;
+  const {id, image, premium, price, title, type, rating} = card;
 
   const name = cardClass + ` place-card`;
 
@@ -43,7 +43,7 @@ const OfferCard = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${raiting * 20}%`}}></span>
+            <span style={{width: `${rating * 20}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -62,9 +62,9 @@ OfferCard.propTypes = {
     price: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    raiting: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
     premium: PropTypes.bool.isRequired,
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
   }),
   cardClass: PropTypes.string.isRequired,
   resetBrightPin: PropTypes.func.isRequired,
@@ -72,3 +72,4 @@ OfferCard.propTypes = {
 };
 
 export default OfferCard;
+

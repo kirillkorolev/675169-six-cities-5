@@ -1,19 +1,15 @@
-import {extend} from "../utils";
-import {ActionType} from "./action";
-import offers from "../mocks/offers";
-
-import {AuthorizationStatus} from "../const";
+import {extend} from "../../../utils";
+import {ActionType} from "../../action";
 
 const initialState = {
   currentCity: `Amsterdam`,
   shownOffers: [],
-  offers,
   sortType: `Popular`,
-  hoveredId: `-1`,
-  authorizationStatus: AuthorizationStatus.NO_AUTH,
+  hoveredId: -1,
 };
 
-const reducer = (state = initialState, action) => {
+
+const process = (state = initialState, action) => {
   switch (action.type) {
     case (ActionType.CHANGE_CITY):
 
@@ -38,20 +34,9 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         hoveredId: action.payload,
       });
-
-
-    case ActionType.REQUIRED_AUTHORIZATION:
-      return extend(state, {
-        authorizationStatus: action.payload,
-      });
-
-    case ActionType.LOAD_OFFERS:
-      return extend(state, {
-        offers: action.payload,
-      });
   }
 
   return state;
 };
 
-export {reducer};
+export {process};

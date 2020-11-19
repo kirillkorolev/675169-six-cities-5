@@ -3,6 +3,7 @@ import React from "react";
 import Header from "../header/header";
 
 const AuthScreen = () => {
+
   return (
     <div className="page page--gray page--login">
       <Header/>
