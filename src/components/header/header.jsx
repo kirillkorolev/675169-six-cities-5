@@ -1,7 +1,17 @@
 import React from "react";
 import {Link} from "react-router-dom";
 
-const Header = () => {
+import {connect} from "react-redux";
+import PropTypes from "prop-types";
+
+import {getAuthorizationStatus, getEmail} from "../../store/reducers/user/selectors";
+
+import {AuthorizationStatus} from "../../const";
+
+const Header = (props) => {
+
+  const {authorizationStatus, email} = props;
+
   return (
     <header className="header">
       <div className="container">
@@ -17,7 +27,12 @@ const Header = () => {
                 <a className="header__nav-link header__nav-link--profile" href="#">
                   <div className="header__avatar-wrapper user__avatar-wrapper">
                   </div>
-                  <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                  <span className="header__user-name user__name">
+                    {authorizationStatus === AuthorizationStatus.NO_AUTH ?
+                      `Sign In` :
+                      email
+                    }
+                  </span>
                 </a>
               </li>
             </ul>
@@ -28,4 +43,16 @@ const Header = () => {
   );
 };
 
-export default Header;
+Header.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
+  email: getEmail(state),
+});
+
+
+export {Header};
+export default connect(mapStateToProps)(Header);

@@ -5,6 +5,9 @@ export const ActionType = {
   RESET_BRIGHT_PIN: `RESET_BRIGHT_PIN`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   LOAD_OFFERS: `LOAD_OFFERS`,
+
+  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
+  SET_INFO: `SET_INFO`,
 };
 
 export const changeCity = (cityName) => ({
@@ -35,4 +38,14 @@ export const requireAuthorization = (status) => ({
 export const loadOffers = (offers) => ({
   type: ActionType.LOAD_OFFERS,
   payload: offers,
+});
+
+export const redirectToRoute = (url) => ({
+  type: ActionType.REDIRECT_TO_ROUTE,
+  payload: url,
+});
+
+export const setInfo = (info) => ({
+  type: ActionType.SET_INFO,
+  payload: info,
 });
