@@ -17,7 +17,7 @@ import browserHistory from "../../browser-history";
 import {AppRoute} from "../../const";
 
 const App = (props) => {
-
+  console.log(props);
   const {offers, shownOffers} = props;
 
 
@@ -50,13 +50,15 @@ const App = (props) => {
           exact
           render={({match}) => {
             const id = match.params.id;
-
+            console.log(offers);
             const offer = offers.find((offerItem) => offerItem.id === id);
 
 
             // const nearlyPlaces = offers.filter((item) => item.cityName === offer.cityName);
 
-            return <OfferScreen offer={offer} nearlyPlaces={shownOffers}/>;
+            return (
+              <OfferScreen offer={offer} nearlyPlaces={shownOffers}/>
+            );
           }}
         />
       </Switch>

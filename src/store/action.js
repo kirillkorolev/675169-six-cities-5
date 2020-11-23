@@ -8,6 +8,8 @@ export const ActionType = {
 
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`,
   SET_INFO: `SET_INFO`,
+
+  LOAD_REVIEWS: `LOAD_REVIEWS`,
 };
 
 export const changeCity = (cityName) => ({
@@ -48,4 +50,9 @@ export const redirectToRoute = (url) => ({
 export const setInfo = (info) => ({
   type: ActionType.SET_INFO,
   payload: info,
+});
+
+export const loadReviews = (reviews) => ({
+  type: ActionType.LOAD_REVIEWS,
+  payload: reviews,
 });

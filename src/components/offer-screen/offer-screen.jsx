@@ -8,6 +8,9 @@ import Header from "../header/header";
 
 import withReviewForm from "../../hocs/with-review-form/with-review-form";
 
+import {connect} from "react-redux";
+import {loadReviews} from "../../store/action";
+
 const placesClass = `near-places__card`;
 
 const ReviewFormWrapped = withReviewForm(ReviewForm);
@@ -15,7 +18,8 @@ const ReviewFormWrapped = withReviewForm(ReviewForm);
 const OfferScreen = (props) => {
 
   const {offer, nearlyPlaces} = props;
-  const {premium, price, title, type, raiting, bedroomsAmmount, ownerName, ownerPhoto, goods, guestsAmmount, photos, reviews} = offer;
+
+  const {isPremium, price, title, type, raiting, bedroomsAmmount, ownerName, ownerPhoto, goods, guestsAmmount, photos} = offer;
 
 
   return (
@@ -36,7 +40,7 @@ const OfferScreen = (props) => {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {premium ?
+              {isPremium ?
                 <div className="property__mark">
                   <span>Premium</span>
                 </div> : <div></div>
@@ -109,7 +113,7 @@ const OfferScreen = (props) => {
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                 <ul className="reviews__list">
 
-                  <ReviewsList reviews={offer.reviews}/>
+                  {/* <ReviewsList reviews={offer.reviewsQ}/> */}
 
                 </ul>
 
@@ -146,16 +150,30 @@ OfferScreen.propTypes = {
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     raiting: PropTypes.number.isRequired,
-    premium: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
     bedroomsAmmount: PropTypes.number.isRequired,
     goods: PropTypes.array.isRequired,
     ownerName: PropTypes.string.isRequired,
     ownerPhoto: PropTypes.string.isRequired,
     guestsAmmount: PropTypes.number.isRequired,
     photos: PropTypes.array.isRequired,
-    reviews: PropTypes.array.isRequired,
+    // reviewsQ: PropTypes.array.isRequired,
   }),
-  nearlyPlaces: PropTypes.array.isRequired
+  nearlyPlaces: PropTypes.array.isRequired,
+  // reviews: PropTypes.array.isRequired,
+
+  // downloadCommentsAction: PropTypes.func.isRequired,
 };
 
+// const mapDispatchToProps = (dispatch, props) => {
+//   console.log(props);
+
+//   return ({
+//     loadReviewsAction(id) {
+//       dispatch(loadReviews(id));
+//     },
+//   });
+// };
+
 export default OfferScreen;
+// export default connect(null, mapDispatchToProps)(OfferScreen);

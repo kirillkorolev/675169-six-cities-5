@@ -1,6 +1,6 @@
 import {createSelector} from "reselect";
 
-import {getOffers} from "../../../store/reducers/offers-data/selectors";
+import {getOffers, getReviews} from "../../../store/reducers/offers-data/selectors";
 // import {citiesList} from "../../../const";
 
 const getCurrentCity = (state) => state.PROCESS.currentCity;
@@ -14,4 +14,11 @@ const getShownOffers = createSelector(
     }
 );
 
-export {getCurrentCity, getSortType, getHoveredId, getShownOffers};
+const getShownReviews = createSelector(
+    [getReviews, getCurrentCity],
+    (reviews, id) => {
+      return reviews.filter((it) => it.id === id);
+    }
+);
+
+export {getCurrentCity, getSortType, getHoveredId, getShownOffers, getShownReviews};

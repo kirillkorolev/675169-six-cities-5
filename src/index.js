@@ -18,7 +18,7 @@ import thunk from "redux-thunk";
 import {createAPI} from "./services/api";
 
 // import {ActionCreator} from "./store/action";
-import {fetchHotelsList, checkAuth} from "./store/api-actions";
+import {fetchHotelsList, checkAuth, fetchReviewsList} from "./store/api-actions";
 
 import {redirect} from "./store/middlewares/redirect";
 
@@ -37,6 +37,7 @@ const store = createStore(
 
 store.dispatch(fetchHotelsList());
 store.dispatch(checkAuth());
+// store.dispatch(fetchReviewsList());
 
 ReactDOM.render(
     <Provider store={store}>

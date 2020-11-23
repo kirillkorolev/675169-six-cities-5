@@ -1,4 +1,4 @@
-import {loadOffers, requireAuthorization, redirectToRoute} from "./action";
+import {loadOffers, requireAuthorization, redirectToRoute, loadReviews} from "./action";
 import {AuthorizationStatus, APIRoute, AppRoute} from "../const";
 import {transformOffer} from "../utils";
 
@@ -25,5 +25,13 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
     })
     .then(() => {
       dispatch(redirectToRoute(AppRoute.ROOT));
+    })
+);
+
+export const fetchReviewsList = (id) => (dispatch, _getState, api) => (
+  api.get(`/comments/:${id}`)
+    .then(({data}) => {
+      // console.log(data);
+      dispatch(loadReviews(data));
     })
 );

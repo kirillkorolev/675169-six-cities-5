@@ -28,7 +28,8 @@ export const sortOffers = (filter, offers) => {
 export const transformOffer = (offer) => {
   return {
     bedroomsAmmount: offer[`bedrooms`],
-    premium: offer[`is_premium`],
+    isPremium: offer[`is_premium`],
+    isFavorite: offer[`is_favorite`],
     rating: offer[`rating`],
     guestsAmmount: offer[`max_adults`],
     price: offer[`price`],

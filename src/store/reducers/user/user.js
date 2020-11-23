@@ -4,8 +4,9 @@ import {ActionType} from "../../action";
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
 
-  info: {},
-  email: `email`,
+  info: {
+    email: `email@mail.ru`,
+  },
 };
 
 const user = (state = initialState, action) => {

@@ -1,9 +1,9 @@
 import {extend} from "../../../utils";
 import {ActionType} from "../../action";
-// import offers from "../../../mocks/offers";
 
 const initialState = {
   offers: [],
+  reviews: [],
 };
 
 const offersData = (state = initialState, action) => {
@@ -17,4 +17,15 @@ const offersData = (state = initialState, action) => {
   return state;
 };
 
-export {offersData};
+const reviewsData = (state = initialState, action) => {
+  switch (action.type) {
+    case ActionType.LOAD_REVIEWS:
+      return extend(state, {
+        reviews: action.payload,
+      });
+  }
+
+  return state;
+};
+
+export {offersData, reviewsData};
