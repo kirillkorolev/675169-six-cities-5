@@ -38,7 +38,6 @@ export const transformOffer = (offer) => {
     id: offer[`id`],
     image: offer[`preview_image`],
 
-
     ownerName: offer[`host`][`name`],
     ownerId: offer[`host`][`id`],
     ownerStatus: offer[`host`][`is_pro`],
@@ -50,11 +49,25 @@ export const transformOffer = (offer) => {
     cityName: offer[`city`][`name`],
 
     goods: offer[`goods`],
-    photos: offer[`images`],
+    photos: offer[`images`].slice(0, 6),
     description: offer[`description`],
 
     offerLatitude: offer[`location`][`latitude`],
     offerLongitude: offer[`location`][`longitude`],
     offerZoom: offer[`location`][`zoom`],
+  };
+};
+
+export const transformReview = (review) => {
+  return {
+    text: review[`comment`],
+    rating: review[`rating`],
+    date: review[`date`],
+    id: review[`id`],
+
+    photo: review[`user`][`avatar_url`],
+    name: review[`user`][`name`],
+    userId: review[`user`][`id`],
+    isPro: review[`user`][`is_pro`],
   };
 };

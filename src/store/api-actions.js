@@ -1,6 +1,6 @@
-import {loadOffers, requireAuthorization, redirectToRoute, loadReviews} from "./action";
+import {loadOffers, requireAuthorization, redirectToRoute, loadReviews, loadNearby} from "./action";
 import {AuthorizationStatus, APIRoute, AppRoute} from "../const";
-import {transformOffer} from "../utils";
+import {transformOffer, transformReview} from "../utils";
 
 import {setInfo} from "../store/action";
 
@@ -29,9 +29,17 @@ export const login = ({login: email, password}) => (dispatch, _getState, api) =>
 );
 
 export const fetchReviewsList = (id) => (dispatch, _getState, api) => (
-  api.get(`/comments/:${id}`)
+  api.get(`/comments/${id}`)
     .then(({data}) => {
-      // console.log(data);
-      dispatch(loadReviews(data));
+      dispatch(loadReviews(
+          data.map((it) => transformReview(it))
+      ));
     })
+);
+
+export const fetchNearbyList = (id) => (dispatch, _getState, api) => (
+  api.get(`/hotels/${id}/nearby`)
+    .then(({data}) => dispatch(loadNearby(
+        data.map((it) => transformOffer(it))
+    )))
 );

@@ -10,6 +10,7 @@ export const ActionType = {
   SET_INFO: `SET_INFO`,
 
   LOAD_REVIEWS: `LOAD_REVIEWS`,
+  LOAD_NEARBY: `LOAD_NEARBY`,
 };
 
 export const changeCity = (cityName) => ({
@@ -29,7 +30,7 @@ export const setBrightPin = (id) => ({
 
 export const resetBrightPin = () => ({
   type: ActionType.RESET_BRIGHT_PIN,
-  payload: `-1`,
+  payload: -1,
 });
 
 export const requireAuthorization = (status) => ({
@@ -55,4 +56,9 @@ export const setInfo = (info) => ({
 export const loadReviews = (reviews) => ({
   type: ActionType.LOAD_REVIEWS,
   payload: reviews,
+});
+
+export const loadNearby = (nearby) => ({
+  type: ActionType.LOAD_NEARBY,
+  payload: nearby,
 });

@@ -2,18 +2,18 @@ import {extend} from "../../../utils";
 import {ActionType} from "../../action";
 
 const initialState = {
-  offers: [],
+  reviews: [],
 };
 
-const offersData = (state = initialState, action) => {
+const reviewsData = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.LOAD_OFFERS:
+    case ActionType.LOAD_REVIEWS:
       return extend(state, {
-        offers: action.payload,
+        reviews: action.payload,
       });
   }
 
   return state;
 };
 
-export {offersData};
+export {reviewsData};

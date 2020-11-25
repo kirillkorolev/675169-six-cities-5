@@ -2,18 +2,18 @@ import {extend} from "../../../utils";
 import {ActionType} from "../../action";
 
 const initialState = {
-  offers: [],
+  nearby: [],
 };
 
-const offersData = (state = initialState, action) => {
+const nearbyData = (state = initialState, action) => {
   switch (action.type) {
-    case ActionType.LOAD_OFFERS:
+    case ActionType.LOAD_NEARBY:
       return extend(state, {
-        offers: action.payload,
+        nearby: action.payload,
       });
   }
 
   return state;
 };
 
-export {offersData};
+export {nearbyData};

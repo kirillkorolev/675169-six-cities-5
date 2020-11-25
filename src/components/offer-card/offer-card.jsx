@@ -3,12 +3,9 @@ import PropTypes from "prop-types";
 
 import {Link} from "react-router-dom";
 
-// import {fetchReviewsList} from "../../store/api-actions";
-
 const OfferCard = (props) => {
   const {card, cardClass, setBrightPin, resetBrightPin} = props;
   const {id, image, isPremium, price, title, type, rating, isFavorite} = card;
-
   const name = cardClass + ` place-card`;
 
   return (
@@ -57,8 +54,6 @@ const OfferCard = (props) => {
           <Link to={`/offer/${id}`}>
             {title}
           </Link>
-
-          {/* <a href="#">{title}</a> */}
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -80,13 +75,6 @@ OfferCard.propTypes = {
   cardClass: PropTypes.string.isRequired,
   resetBrightPin: PropTypes.func.isRequired,
   setBrightPin: PropTypes.func.isRequired,
-  // getReviewsAction: PropTypes.func.isRequired,
 };
-
-// const mapDispatchToProps = (dispatch) => ({
-//   getReviewsAction(id) {
-//     dispatch(fetchReviewsList(id));
-//   }
-// });
 
 export default OfferCard;

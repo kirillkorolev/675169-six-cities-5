@@ -36,7 +36,7 @@ const withReviewForm = (Component) => {
     }
   }
 
-  WithReviewForm.PropTypes = {
+  WithReviewForm.propTypes = {
     onHandleFieldChange: PropTypes.func.isRequired,
   };
 

@@ -17,9 +17,7 @@ import browserHistory from "../../browser-history";
 import {AppRoute} from "../../const";
 
 const App = (props) => {
-  console.log(props);
-  const {offers, shownOffers} = props;
-
+  const {offers} = props;
 
   return (
     <BrowserRouter history={browserHistory}>
@@ -49,15 +47,14 @@ const App = (props) => {
           path="/offer/:id?"
           exact
           render={({match}) => {
-            const id = match.params.id;
-            console.log(offers);
+            const id = Number(match.params.id);
             const offer = offers.find((offerItem) => offerItem.id === id);
 
 
             // const nearlyPlaces = offers.filter((item) => item.cityName === offer.cityName);
 
             return (
-              <OfferScreen offer={offer} nearlyPlaces={shownOffers}/>
+              <OfferScreen offer={offer} />
             );
           }}
         />

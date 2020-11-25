@@ -3,6 +3,10 @@ import leaflet from "leaflet";
 import PropTypes from "prop-types";
 import "leaflet/dist/leaflet.css";
 
+import {connect} from "react-redux";
+import {getHoveredId} from "../../store/reducers/process/selectors";
+
+
 class Map extends PureComponent {
   constructor(props) {
     super(props);
@@ -67,6 +71,21 @@ class Map extends PureComponent {
 Map.propTypes = {
   offers: PropTypes.array.isRequired,
   hoveredId: PropTypes.number.isRequired,
+
+  // setBrightPinAction: PropTypes.func.isRequired,
 };
 
-export default Map;
+const mapStateToProps = (state) => ({
+  hoveredId: getHoveredId(state),
+});
+
+// const mapDispatchToProps = (dispatch) => ({
+//   setBrightPinAction(hoveredId) {
+//     dispatch(setBrightPin(hoveredId));
+//   },
+// });
+
+export {Map};
+export default connect(mapStateToProps)(Map);
+
+// export default Map;
