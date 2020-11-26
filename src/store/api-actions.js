@@ -1,4 +1,4 @@
-import {loadOffers, requireAuthorization, redirectToRoute, loadReviews, loadNearby} from "./action";
+import {loadOffers, requireAuthorization, redirectToRoute, loadReviews, loadNearby, loadCurrentOffer} from "./action";
 import {AuthorizationStatus, APIRoute, AppRoute} from "../const";
 import {transformOffer, transformReview} from "../utils";
 
@@ -42,4 +42,11 @@ export const fetchNearbyList = (id) => (dispatch, _getState, api) => (
     .then(({data}) => dispatch(loadNearby(
         data.map((it) => transformOffer(it))
     )))
+);
+
+export const fetchOfferById = (id) => (dispatch, _getState, api) => (
+  api.get(`/hotels/${id}`)
+    .then(({data}) => {
+      dispatch(loadCurrentOffer(transformOffer(data)));
+    })
 );

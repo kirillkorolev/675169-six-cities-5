@@ -11,6 +11,7 @@ export const ActionType = {
 
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   LOAD_NEARBY: `LOAD_NEARBY`,
+  LOAD_CURRENT_OFFER: `LOAD_CURRENT_OFFER`,
 };
 
 export const changeCity = (cityName) => ({
@@ -62,3 +63,9 @@ export const loadNearby = (nearby) => ({
   type: ActionType.LOAD_NEARBY,
   payload: nearby,
 });
+
+export const loadCurrentOffer = (currentOffer) => ({
+  type: ActionType.LOAD_CURRENT_OFFER,
+  payload: currentOffer,
+});
+

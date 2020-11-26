@@ -4,6 +4,11 @@ export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
 
+export const sortByDate = (arr) => {
+  const newArr = arr.slice();
+  return newArr.sort((a, b) => new Date(b.date) - new Date(a.date));
+};
+
 export const sortOffers = (filter, offers) => {
 
   const sorteredOffers = offers.slice();
@@ -55,6 +60,7 @@ export const transformOffer = (offer) => {
     offerLatitude: offer[`location`][`latitude`],
     offerLongitude: offer[`location`][`longitude`],
     offerZoom: offer[`location`][`zoom`],
+    isPro: offer[`host`][`is_pro`],
   };
 };
 

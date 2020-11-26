@@ -6,12 +6,14 @@ import AuthScreen from "../auth-screen/auth-screen";
 import FavoritesScreen from "../favorites-screen/favorites-screen";
 import OfferScreen from "../offer-screen/offer-screen";
 
+import Loading from "../loading/loading";
+
 import {connect} from "react-redux";
 import {getOffers} from "../../store/reducers/offers-data/selectors";
 
 import PrivateRoute from "../private-route/private-route";
 
-import {getShownOffers} from "../../store/reducers/process/selectors";
+// import {getShownOffers} from "../../store/reducers/process/selectors";
 
 import browserHistory from "../../browser-history";
 import {AppRoute} from "../../const";
@@ -46,18 +48,35 @@ const App = (props) => {
         <Route
           path="/offer/:id?"
           exact
+
+          // component={OfferScreen}
+
           render={({match}) => {
+
             const id = Number(match.params.id);
             const offer = offers.find((offerItem) => offerItem.id === id);
 
 
-            // const nearlyPlaces = offers.filter((item) => item.cityName === offer.cityName);
+            return offers.length ? <OfferScreen id={id} currentOffer={offer}/> : <Loading/>;
 
-            return (
-              <OfferScreen offer={offer} />
-            );
+            // return (
+            //   <OfferScreen offer={offer} />
+            // );
           }}
         />
+        {/* <Route
+          render={() => {
+            if (offers) {
+              return (
+                <OfferScreen />
+              );
+            } else {
+              return (
+                <Loading/>
+              );
+            }
+          }}
+        /> */}
       </Switch>
     </BrowserRouter>
   );
@@ -65,12 +84,12 @@ const App = (props) => {
 
 const mapStateToProps = (state) => ({
   offers: getOffers(state),
-  shownOffers: getShownOffers(state),
+  // shownOffers: getShownOffers(state),
 });
 
 App.propTypes = {
   offers: PropTypes.array.isRequired,
-  shownOffers: PropTypes.array.isRequired,
+  // shownOffers: PropTypes.array.isRequired,
 };
 
 export {App};
