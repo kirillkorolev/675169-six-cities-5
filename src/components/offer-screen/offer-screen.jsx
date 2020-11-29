@@ -11,8 +11,8 @@ import withReviewForm from "../../hocs/with-review-form/with-review-form";
 
 import {connect} from "react-redux";
 
-import {getReviews, getNearby, getCurrentOffer, getCurrentIdFromUrl} from "../../store/reducers/offers-data/selectors";
-import {fetchReviewsList, fetchNearbyList, fetchOfferById} from "../../store/api-actions";
+import {getReviews, getNearby} from "../../store/reducers/offers-data/selectors";
+import {fetchReviewsList, fetchNearbyList} from "../../store/api-actions";
 // import {getNearby} from "../../store/reducers/nearby-data/selectors";
 
 const placesClass = `near-places__card`;
@@ -23,13 +23,12 @@ const ReviewFormWrapped = withReviewForm(ReviewForm);
 class OfferScreen extends PureComponent {
   constructor(props) {
     super(props);
-    this.id = props.id;
+    this.id = props.currentOffer.id;
   }
 
   componentDidMount() {
     this.props.loadReviewsAction(this.id);
     this.props.loadNearbyAction(this.id);
-    // this.props.loadCurrentOfferAction(this.id);
   }
 
   // componentDidUpdate(prevProps) {
@@ -43,10 +42,9 @@ class OfferScreen extends PureComponent {
 
 
   render() {
-    console.log(this.props);
     const {currentOffer, reviews, nearby} = this.props;
 
-    const {isPremium, price, title, type, rating, bedroomsAmmount, ownerName, ownerPhoto, goods, guestsAmmount, photos, isPro} = currentOffer;
+    const {isPremium, price, title, type, rating, bedroomsAmmount, ownerName, ownerPhoto, goods, guestsAmmount, photos, isPro, id} = currentOffer;
 
     return (
       <div className="page">
@@ -143,7 +141,7 @@ class OfferScreen extends PureComponent {
 
                   </ul>
 
-                  <ReviewFormWrapped />
+                  <ReviewFormWrapped id={id}/>
 
                 </section>
               </div>
@@ -186,44 +184,30 @@ OfferScreen.propTypes = {
     ownerPhoto: PropTypes.string.isRequired,
     guestsAmmount: PropTypes.number.isRequired,
     photos: PropTypes.array.isRequired,
-    id: PropTypes.number.isRequired,
     isPro: PropTypes.bool.isRequired,
+    id: PropTypes.number.isRequired,
   }),
 
   reviews: PropTypes.array.isRequired,
   nearby: PropTypes.array.isRequired,
-
   loadReviewsAction: PropTypes.func.isRequired,
   loadNearbyAction: PropTypes.func.isRequired,
-  loadCurrentOfferAction: PropTypes.func.isRequired,
-  id: PropTypes.number.isRequired,
 };
 
-const mapStateToProps = (state, ownProps) => {
-  return ({
-   //  id: getCurrentIdFromUrl(ownProps),
-    reviews: getReviews(state),
-    nearby: getNearby(state),
-    // currentOffer: getCurrentOffer(state),
-  });
-};
+const mapStateToProps = (state) => ({
+  reviews: getReviews(state),
+  nearby: getNearby(state),
+});
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => ({
+  loadReviewsAction(id) {
+    dispatch(fetchReviewsList(id));
+  },
 
-  return ({
-    loadReviewsAction(id) {
-      dispatch(fetchReviewsList(id));
-    },
-
-    loadNearbyAction(id) {
-      dispatch(fetchNearbyList(id));
-    },
-
-    // loadCurrentOfferAction(id) {
-    //   dispatch(fetchOfferById(id));
-    // }
-  });
-};
+  loadNearbyAction(id) {
+    dispatch(fetchNearbyList(id));
+  },
+});
 
 export {OfferScreen};
 export default connect(mapStateToProps, mapDispatchToProps)(OfferScreen);

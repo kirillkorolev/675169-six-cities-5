@@ -1,8 +1,6 @@
-import {loadOffers, requireAuthorization, redirectToRoute, loadReviews, loadNearby, loadCurrentOffer} from "./action";
+import {loadOffers, requireAuthorization, redirectToRoute, loadReviews, loadNearby, setInfo, setNewReview} from "./action";
 import {AuthorizationStatus, APIRoute, AppRoute} from "../const";
 import {transformOffer, transformReview} from "../utils";
-
-import {setInfo} from "../store/action";
 
 export const fetchHotelsList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.HOTELS)
@@ -44,9 +42,14 @@ export const fetchNearbyList = (id) => (dispatch, _getState, api) => (
     )))
 );
 
-export const fetchOfferById = (id) => (dispatch, _getState, api) => (
-  api.get(`/hotels/${id}`)
+export const postReview = ({review: comment, rating}, id) => (dispatch, _getState, api) => (
+  api.post(`/comments/${id}`, {comment, rating})
     .then(({data}) => {
-      dispatch(loadCurrentOffer(transformOffer(data)));
+      dispatch(setNewReview(
+          data.map((it) => transformReview(it))
+      ));
+    })
+    .catch((err) => {
+      throw err;
     })
 );

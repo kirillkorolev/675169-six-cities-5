@@ -9,10 +9,10 @@ const Loading = () => {
       <main
         className="page__main "
       >
-        Loading...
+        <div>Loading...</div>
       </main>
     </div>
   );
 };
 
-export default {Loading};
+export default Loading;

@@ -30,13 +30,6 @@ const offersData = (state = initialState, action) => {
       });
   }
 
-  switch (action.type) {
-    case ActionType.LOAD_CURRENT_OFFER:
-      return extend(state, {
-        currentOffer: action.payload,
-      });
-  }
-
   return state;
 };
 
