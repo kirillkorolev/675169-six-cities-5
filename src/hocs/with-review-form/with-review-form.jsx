@@ -10,6 +10,8 @@ const withReviewForm = (Component) => {
     constructor(props) {
       super(props);
 
+      console.log(props);
+
       this.state = {
         rating: ``,
         review: ``,
@@ -18,7 +20,7 @@ const withReviewForm = (Component) => {
 
       this.handleSubmit = this.handleSubmit.bind(this);
       this.handleFieldChange = this.handleFieldChange.bind(this);
-      this.postReviewAction = this.postReviewAction.bind(this);
+      this.postReviewAction = this.props.postReviewAction.bind(this);
     }
 
     validateForm() {
@@ -51,7 +53,6 @@ const withReviewForm = (Component) => {
     }
 
     render() {
-
       return (
         <Component
           {...this.props}
@@ -64,22 +65,20 @@ const withReviewForm = (Component) => {
   }
 
   WithReviewForm.propTypes = {
-    // onHandleFieldChange: PropTypes.func.isRequired,
-
-    postReviewAction: PropTypes.func.isRequired,
     id: PropTypes.number.isRequired,
+    postReviewAction: PropTypes.func.isRequired,
   };
 
-  return WithReviewForm;
+
+  const mapDispatchToProps = (dispatch) => ({
+    postReviewAction(data, id) {
+      dispatch(postReview(data, id));
+    }
+  });
+
+
+  return connect(null, mapDispatchToProps)(WithReviewForm);
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  postReviewAction(data, id) {
-    dispatch(postReview(data, id));
-  }
-});
 
-export {withReviewForm};
-export default connect(null, mapDispatchToProps)(withReviewForm);
-
-// export default withReviewForm;
+export default withReviewForm;

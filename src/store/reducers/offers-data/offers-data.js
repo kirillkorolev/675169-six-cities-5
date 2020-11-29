@@ -6,6 +6,7 @@ const initialState = {
   nearby: [],
   reviews: [],
   currentOffer: {},
+  favorite: [],
 };
 
 const offersData = (state = initialState, action) => {
@@ -27,6 +28,13 @@ const offersData = (state = initialState, action) => {
     case ActionType.LOAD_REVIEWS:
       return extend(state, {
         reviews: action.payload,
+      });
+  }
+
+  switch (action.type) {
+    case ActionType.LOAD_FAVORITE:
+      return extend(state, {
+        favorite: action.payload,
       });
   }
 

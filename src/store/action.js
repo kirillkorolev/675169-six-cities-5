@@ -12,6 +12,9 @@ export const ActionType = {
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   LOAD_NEARBY: `LOAD_NEARBY`,
   SET_NEW_REVIEW: `SET_NEW_REVIEW`,
+  LOAD_FAVORITE: `LOAD_FAVORITE`,
+
+  TOGGLE_FAV_OFFER: `TOGGLE_FAV_OFFER`,
 };
 
 export const changeCity = (cityName) => ({
@@ -69,3 +72,12 @@ export const setNewReview = (data) => ({
   payload: data,
 });
 
+export const loadFavorite = (data) => ({
+  type: ActionType.LOAD_FAVORITE,
+  payload: data,
+});
+
+export const toggleFavOffer = (data) => ({
+  type: ActionType.TOGGLE_FAV_OFFER,
+  payload: data,
+});

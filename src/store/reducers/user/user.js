@@ -5,7 +5,7 @@ const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
 
   info: {
-    email: `email@mail.ru`,
+    email: ``,
   },
 };
 

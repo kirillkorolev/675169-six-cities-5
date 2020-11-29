@@ -1,19 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-// import {connect} from "react-redux";
-
-import {postReview} from "../../store/api-actions";
-
 const ReviewForm = (props) => {
-  const {onSubmitAction, onHandleFieldChange, postReviewAction} = props;
-  console.log(props);
+  const {onSubmitAction, onHandleFieldChange} = props;
+
   return (
     <form className="reviews__form form" action="#" method="post"
-      onSubmit={() => {
-        onSubmitAction();
-        postReviewAction();
-      }}
+      onSubmit={onSubmitAction}
     >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
@@ -89,7 +82,12 @@ const ReviewForm = (props) => {
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled="">Submit</button>
+        <button className="reviews__submit form__submit button"
+          type="submit"
+          disabled=""
+        >
+          Submit
+        </button>
       </div>
     </form>
   );
@@ -98,20 +96,8 @@ const ReviewForm = (props) => {
 ReviewForm.propTypes = {
   onSubmitAction: PropTypes.func.isRequired,
   onHandleFieldChange: PropTypes.func.isRequired,
-
-  postReviewAction: PropTypes.func.isRequired,
-
   id: PropTypes.number.isRequired,
 };
 
 export default ReviewForm;
 
-
-// const mapDispatchToProps = (dispatch) => ({
-//   postReviewAction(data, id) {
-//     dispatch(postReview(data, id));
-//   },
-// });
-
-// export {ReviewForm};
-// export default connect(null, mapDispatchToProps)(ReviewForm);

@@ -77,3 +77,5 @@ export const transformReview = (review) => {
     isPro: review[`user`][`is_pro`],
   };
 };
+
+export const getUniqueCitiesList = (arr) => [...new Set(arr.map((item) => item.cityName))];

@@ -1,19 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Switch, Route, Router as BrowserRouter} from "react-router-dom";
+import {connect} from "react-redux";
+
 import MainPage from "../main-page/main-page";
 import AuthScreen from "../auth-screen/auth-screen";
 import FavoritesScreen from "../favorites-screen/favorites-screen";
 import OfferScreen from "../offer-screen/offer-screen";
-
+import NotFound from "../not-found/not-found";
 import Loading from "../loading/loading";
-
-import {connect} from "react-redux";
-import {getOffers} from "../../store/reducers/offers-data/selectors";
-
 import PrivateRoute from "../private-route/private-route";
 
-// import {getShownOffers} from "../../store/reducers/process/selectors";
+import {getOffers} from "../../store/reducers/offers-data/selectors";
 
 import browserHistory from "../../browser-history";
 import {AppRoute} from "../../const";
@@ -39,44 +37,28 @@ const App = (props) => {
         <PrivateRoute
           exact
           path={AppRoute.FAVORITES}
-          render={() => {
-            return (
-              <FavoritesScreen/>
-            );
-          }}
+          render={() => (<FavoritesScreen />)}
         />
         <Route
           path="/offer/:id?"
           exact
-
-          // component={OfferScreen}
 
           render={({match}) => {
 
             const id = Number(match.params.id);
             const offer = offers.find((offerItem) => offerItem.id === id);
 
-
-            return offers.length ? <OfferScreen id={id} currentOffer={offer}/> : <Loading/>;
-
-            // return (
-            //   <OfferScreen offer={offer} />
-            // );
-          }}
-        />
-        {/* <Route
-          render={() => {
-            if (offers) {
-              return (
-                <OfferScreen />
-              );
+            if (offer) {
+              return offers.length ? <OfferScreen id={id} currentOffer={offer}/> : <Loading/>;
             } else {
-              return (
-                <Loading/>
-              );
+              return <NotFound />;
             }
           }}
-        /> */}
+        />
+        <Route>
+          <NotFound/>
+        </Route>
+
       </Switch>
     </BrowserRouter>
   );
@@ -84,12 +66,10 @@ const App = (props) => {
 
 const mapStateToProps = (state) => ({
   offers: getOffers(state),
-  // shownOffers: getShownOffers(state),
 });
 
 App.propTypes = {
   offers: PropTypes.array.isRequired,
-  // shownOffers: PropTypes.array.isRequired,
 };
 
 export {App};

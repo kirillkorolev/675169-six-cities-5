@@ -6,14 +6,17 @@ import ReviewsList from "../reviews-list/reviews-list";
 import Map from "../map/map";
 import OffersList from "../offers-list/offers-list";
 import Header from "../header/header";
+import FavoritesButton from "../favorites-button/favorites-button";
 
 import withReviewForm from "../../hocs/with-review-form/with-review-form";
 
 import {connect} from "react-redux";
 
 import {getReviews, getNearby} from "../../store/reducers/offers-data/selectors";
+import {getAuthorizationStatus} from "../../store/reducers/user/selectors";
 import {fetchReviewsList, fetchNearbyList} from "../../store/api-actions";
-// import {getNearby} from "../../store/reducers/nearby-data/selectors";
+
+import {AuthorizationStatus} from "../../const";
 
 const placesClass = `near-places__card`;
 
@@ -23,6 +26,7 @@ const ReviewFormWrapped = withReviewForm(ReviewForm);
 class OfferScreen extends PureComponent {
   constructor(props) {
     super(props);
+
     this.id = props.currentOffer.id;
   }
 
@@ -31,20 +35,25 @@ class OfferScreen extends PureComponent {
     this.props.loadNearbyAction(this.id);
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.id !== this.props.id) {
+  componentDidUpdate(prevProps) {
+    if (prevProps.id !== this.props.id) {
 
-  //     this.props.loadReviewsAction(this.props.id);
-  //     this.props.loadNearbyAction(this.props.id);
-  //     this.props.loadCurrentOfferAction(this.props.id);
-  //   }
-  // }
+      this.props.loadReviewsAction(this.props.id);
+      this.props.loadNearbyAction(this.props.id);
+    }
+  }
 
 
   render() {
-    const {currentOffer, reviews, nearby} = this.props;
+    const {currentOffer, reviews, nearby, authorizationStatus} = this.props;
 
-    const {isPremium, price, title, type, rating, bedroomsAmmount, ownerName, ownerPhoto, goods, guestsAmmount, photos, isPro, id} = currentOffer;
+    const buttonDetails = {
+      name: `property`,
+      width: 31,
+      height: 33,
+    };
+
+    const {isPremium, price, title, type, rating, bedroomsAmmount, ownerName, ownerPhoto, goods, guestsAmmount, photos, isPro, isFavorite, id} = currentOffer;
 
     return (
       <div className="page">
@@ -73,12 +82,9 @@ class OfferScreen extends PureComponent {
                   <h1 className="property__name">
                     {title}
                   </h1>
-                  <button className="property__bookmark-button button" type="button">
-                    <svg className="property__bookmark-icon" width="31" height="33">
-                      <use xlinkHref="#icon-bookmark"></use>
-                    </svg>
-                    <span className="visually-hidden">To bookmarks</span>
-                  </button>
+
+                  <FavoritesButton isFavorite={isFavorite} buttonDetails={buttonDetails}/>
+
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
@@ -141,7 +147,9 @@ class OfferScreen extends PureComponent {
 
                   </ul>
 
-                  <ReviewFormWrapped id={id}/>
+                  {authorizationStatus === AuthorizationStatus.AUTH &&
+                    <ReviewFormWrapped id={id}/>
+                  }
 
                 </section>
               </div>
@@ -178,6 +186,7 @@ OfferScreen.propTypes = {
     type: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     isPremium: PropTypes.bool.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
     bedroomsAmmount: PropTypes.number.isRequired,
     goods: PropTypes.array.isRequired,
     ownerName: PropTypes.string.isRequired,
@@ -192,11 +201,15 @@ OfferScreen.propTypes = {
   nearby: PropTypes.array.isRequired,
   loadReviewsAction: PropTypes.func.isRequired,
   loadNearbyAction: PropTypes.func.isRequired,
+  authorizationStatus: PropTypes.string.isRequired,
+
+  id: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   reviews: getReviews(state),
   nearby: getNearby(state),
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
