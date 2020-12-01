@@ -1,6 +1,6 @@
 import {loadOffers, requireAuthorization, redirectToRoute, loadReviews, loadNearby, setInfo, setNewReview, toggleFavOffer} from "./action";
 import {AuthorizationStatus, APIRoute, AppRoute} from "../const";
-import {transformOffer, transformReview} from "../utils";
+import {transformOffer, transformReview, transformToReview} from "../utils";
 
 export const fetchHotelsList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.HOTELS)
@@ -44,18 +44,19 @@ export const fetchNearbyList = (id) => (dispatch, _getState, api) => (
 
 export const fetchFavoriteList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.FAVORITE)
-    .then(({data}) => dispatch(loadNearby(
-        data.map((it) => transformOffer(it))
-    )))
+    .then(({data}) => {
+
+      dispatch(loadNearby(
+          data.map((it) => transformOffer(it))
+      ));
+    })
 );
 
 export const postReview = ({review: comment, rating}, id) => (dispatch, _getState, api) => (
   api.post(`/comments/${id}`, {comment, rating})
     .then(({data}) => {
       dispatch(setNewReview(
-          data.map((it) => {
-            transformReview(it);
-          })
+          data.map((it) => transformToReview(it))
       ));
     })
     .catch((err) => {
@@ -63,7 +64,7 @@ export const postReview = ({review: comment, rating}, id) => (dispatch, _getStat
     })
 );
 
-export const postOfferToFavorite = (id, status) => (dispatch, _getState, api) => (
+export const postToFavorite = (id, status) => (dispatch, _getState, api) => (
   api.post(`/favorite/${id}/${status}`)
     .then(({data}) => {
       dispatch(toggleFavOffer(transformOffer(data)));

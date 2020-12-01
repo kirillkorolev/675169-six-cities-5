@@ -12,4 +12,4 @@ const FavoritesEmpty = () => {
   );
 };
 
-export default {FavoritesEmpty};
+export default FavoritesEmpty;

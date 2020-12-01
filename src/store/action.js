@@ -81,3 +81,4 @@ export const toggleFavOffer = (data) => ({
   type: ActionType.TOGGLE_FAV_OFFER,
   payload: data,
 });
+

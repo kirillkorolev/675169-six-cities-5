@@ -78,4 +78,27 @@ export const transformReview = (review) => {
   };
 };
 
-export const getUniqueCitiesList = (arr) => [...new Set(arr.map((item) => item.cityName))];
+export const getUniqueCitiesList = (arr) => {
+  return [...new Set(arr.map((item) => item.cityName))];
+};
+
+export const transformToReview = (comment) => {
+  return {
+    text: comment[`comment`],
+    date: comment[`date`],
+    id: comment[`id`],
+    rating: comment[`rating`],
+    photo: comment[`user`][`avatar_url`],
+    name: comment[`user`][`name`],
+  };
+};
+
+export const replaceItem = (arr, id, newItem) => {
+  if (!arr) {
+    return null;
+  }
+
+  const it = arr.findIndex((el) => el.id === id);
+
+  return [...arr.slice(0, it), newItem, ...arr.slice(it + 1)];
+};

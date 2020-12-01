@@ -12,7 +12,7 @@ import {connect} from "react-redux";
 
 import PropTypes from "prop-types";
 
-import getUniqueCitiesList from "../../utils";
+import {getUniqueCitiesList} from "../../utils";
 
 class FavoritesScreen extends PureComponent {
   constructor(props) {
@@ -24,28 +24,25 @@ class FavoritesScreen extends PureComponent {
   }
 
   render() {
-    const {favorite, favoriteCityNames} = this.props;
+    const {favorite} = this.props;
+
+    const favLength = favorite.length;
+    const unCities = getUniqueCitiesList(favorite);
+    console.log(unCities);
 
     return (
-      <div className="page">
+      <div className={`page ${favLength === 0 ? `page--favorites-empty` : ``}`}>
         <Header/>
         <main
-          className={`page__main page__main--favorites ${favorite.length === 0 ? `page__main--favorites-empty` : ``}`}
+          className={`page__main page__main--favorites ${favLength === 0 ? `page__main--favorites-empty` : ``}`}
         >
           <div className="page__favorites-container container">
-            {favorite.length === 0 ?
-              <FavoritesEmpty/> :
 
-              <FavoritesList offers={favorite} cityNames={favoriteCityNames}/>
+            {favLength === 0 ?
+              <FavoritesEmpty /> :
 
-              // <section className="favorites">
-              //   <h1 className="favorites__title">Saved listing</h1>
-              //   <ul className="favorites__list">
-              //     {favorite.map((offer) => (
-              //       <FavoritesItem key={offer.id}/>
-              //     ))}
-              //   </ul>
-              // </section>
+              <FavoritesList offers={favorite} cityNames={unCities}/>
+
             }
           </div>
         </main>
@@ -58,19 +55,19 @@ class FavoritesScreen extends PureComponent {
 
 FavoritesScreen.propTypes = {
   favorite: PropTypes.array.isRequired,
-  favoriteCityNames: PropTypes.array.isRequired,
+  // favoriteCityNames: PropTypes.array.isRequired,
 
   loadFavoriteAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   favorite: getFavorite(state),
-  favoriteCityNames: getUniqueCitiesList(state.favorite),
+
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loadFavoriteAction(id) {
-    dispatch(fetchFavoriteList(id));
+  loadFavoriteAction() {
+    dispatch(fetchFavoriteList());
   },
 });
 

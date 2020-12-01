@@ -28,4 +28,4 @@ FavoritesItem.propTypes = {
   offers: PropTypes.array.isRequired,
 };
 
-export default {FavoritesItem};
+export default FavoritesItem;

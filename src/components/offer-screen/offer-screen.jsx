@@ -83,7 +83,11 @@ class OfferScreen extends PureComponent {
                     {title}
                   </h1>
 
-                  <FavoritesButton isFavorite={isFavorite} buttonDetails={buttonDetails}/>
+                  <FavoritesButton
+                    isFavorite={isFavorite}
+                    buttonDetails={buttonDetails}
+                    id={id}
+                  />
 
                 </div>
                 <div className="property__rating rating">

@@ -11,7 +11,7 @@ const FavoritesList = (props) => {
       <h1 className="favorites__title">Saved listing</h1>
       <ul className="favorites__list">
 
-        {cityNames.map((item) => <FavoritesItem key={item} cityName={item} offers={offers.filter((offer) => offer.city.name === item)}/>)}
+        {cityNames.map((item) => <FavoritesItem key={item} cityName={item} offers={offers.filter((offer) => offer.cityName === item)}/>)}
 
       </ul>
     </section>

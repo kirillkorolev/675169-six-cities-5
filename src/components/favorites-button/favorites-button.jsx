@@ -1,8 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {connect} from "react-redux";
+
+import {postToFavorite} from "../../store/api-actions";
 
 const FavoritesButton = (props) => {
-  const {isFavorite, buttonDetails} = props;
+  const {isFavorite, buttonDetails, id, toggleFavorite} = props;
   const {name, width, height} = buttonDetails;
 
   return (
@@ -10,6 +13,9 @@ const FavoritesButton = (props) => {
       className={`${name}__bookmark-button ${isFavorite ? `${name}__bookmark-button--active` : ``} button`}
 
       type="button"
+      onClick={() => {
+        toggleFavorite(id, isFavorite ? 0 : 1);
+      }}
     >
       <svg
         className={`${name}__bookmark-icon`}
@@ -24,11 +30,24 @@ const FavoritesButton = (props) => {
 
 FavoritesButton.propTypes = {
   isFavorite: PropTypes.bool.isRequired,
+  id: PropTypes.number.isRequired,
+
   buttonDetails: PropTypes.shape({
     name: PropTypes.string.isRequired,
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
-  })
+  }),
+
+
+  toggleFavorite: PropTypes.func.isRequired,
 };
 
-export default FavoritesButton;
+const mapDispatchToProps = (dispatch) => ({
+  toggleFavorite(id, status) {
+    dispatch(postToFavorite(id, status));
+  }
+});
+
+export {FavoritesButton};
+export default connect(null, mapDispatchToProps)(FavoritesButton);
+
