@@ -6,15 +6,17 @@ const FavoritesList = (props) => {
 
   const {cityNames, offers} = props;
 
-  console.log(props);
-
   return (
     <section className="favorites">
       <h1 className="favorites__title">Saved listing</h1>
       <ul className="favorites__list">
 
         {cityNames.map((item) => (
-          <FavoritesItem key={item} cityName={item} offers={offers.filter((offer) => offer.cityName === item)}/>
+          <FavoritesItem
+            key={item + Math.random()}
+            cityName={item}
+            offers={offers.filter((offer) => offer.cityName === item)}
+          />
         ))}
 
       </ul>

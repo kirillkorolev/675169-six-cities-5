@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const FavoritesItem = (props) => {
-  const {image, price, title, type, isFavorite, rating} = props;
+const FavoritesPlace = (props) => {
+  const {offer} = props;
+  const {image, price, title, type, isFavorite, rating} = offer;
+
 
   return (
     <article className="favorites__card place-card">
@@ -17,7 +19,10 @@ const FavoritesItem = (props) => {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button ${isFavorite ? `place-card__bookmark-button--active` : ``} button`} type="button">
+          <button
+            className={`place-card__bookmark-button ${isFavorite ? `place-card__bookmark-button--active` : ``} button`}
+            type="button"
+          >
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
@@ -39,15 +44,16 @@ const FavoritesItem = (props) => {
   );
 };
 
-FavoritesItem.propTypes = {
-  image: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  raiting: PropTypes.number.isRequired,
-  isPremium: PropTypes.bool.isRequired,
-  isFavorite: PropTypes.bool.isRequired,
-  rating: PropTypes.number.isRequired,
+FavoritesPlace.propTypes = {
+  offer: PropTypes.shape({
+    image: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+  })
 };
 
-export default {FavoritesItem};
+export default FavoritesPlace;
