@@ -3,7 +3,6 @@ import {ActionType} from "../../action";
 
 const initialState = {
   currentCity: `Amsterdam`,
-  shownOffers: [],
   sortType: `Popular`,
   hoveredId: -1,
 };

@@ -1,4 +1,4 @@
-import {loadOffers, requireAuthorization, redirectToRoute, loadReviews, loadNearby, setInfo, setNewReview, toggleFavOffer} from "./action";
+import {loadOffers, requireAuthorization, redirectToRoute, loadReviews, loadNearby, loadFavorites, setInfo, setNewReview, toggleFavOffer} from "./action";
 import {AuthorizationStatus, APIRoute, AppRoute} from "../const";
 import {transformOffer, transformReview, transformToReview} from "../utils";
 
@@ -11,7 +11,13 @@ export const fetchHotelsList = () => (dispatch, _getState, api) => (
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
-    .then(() => dispatch(requireAuthorization(AuthorizationStatus.AUTH)))
+    .then((result) => {
+      if (result.data.email) {
+        dispatch(setInfo({email: result.data.email}));
+      }
+
+      return dispatch(requireAuthorization(AuthorizationStatus.AUTH));
+    })
     .catch(() => {})
 );
 
@@ -46,7 +52,7 @@ export const fetchFavoriteList = () => (dispatch, _getState, api) => (
   api.get(APIRoute.FAVORITE)
     .then(({data}) => {
 
-      dispatch(loadNearby(
+      dispatch(loadFavorites(
           data.map((it) => transformOffer(it))
       ));
     })

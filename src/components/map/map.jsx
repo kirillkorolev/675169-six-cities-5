@@ -2,9 +2,10 @@ import React, {PureComponent} from "react";
 import leaflet from "leaflet";
 import PropTypes from "prop-types";
 import "leaflet/dist/leaflet.css";
-
 import {connect} from "react-redux";
+
 import {getHoveredId} from "../../store/reducers/process/selectors";
+import {IconRoute, IconSize} from "../../const";
 
 
 class Map extends PureComponent {
@@ -17,13 +18,13 @@ class Map extends PureComponent {
     const {cityLatitude, cityLongitude, cityZoom} = offers[0];
 
     const icon = leaflet.icon({
-      iconUrl: `/img/pin.svg`,
-      iconSize: [30, 30]
+      iconUrl: IconRoute.BLUE,
+      iconSize: IconSize,
     });
 
     const brightIcon = leaflet.icon({
-      iconUrl: `/img/pin-active.svg`,
-      iconSize: [30, 30]
+      iconUrl: IconRoute.ORANGE,
+      iconSize: IconSize,
     });
 
     this.map = leaflet.map(`map`, {
@@ -71,21 +72,13 @@ class Map extends PureComponent {
 Map.propTypes = {
   offers: PropTypes.array.isRequired,
   hoveredId: PropTypes.number.isRequired,
-
-  // setBrightPinAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   hoveredId: getHoveredId(state),
 });
 
-// const mapDispatchToProps = (dispatch) => ({
-//   setBrightPinAction(hoveredId) {
-//     dispatch(setBrightPin(hoveredId));
-//   },
-// });
-
 export {Map};
 export default connect(mapStateToProps)(Map);
 
-// export default Map;
+

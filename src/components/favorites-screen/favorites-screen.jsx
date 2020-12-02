@@ -24,23 +24,22 @@ class FavoritesScreen extends PureComponent {
   }
 
   render() {
-    const {favorite} = this.props;
+    const {favorites} = this.props;
 
-    const uniqueCities = getUniqueCitiesList(favorite);
+    const uniqueCities = getUniqueCitiesList(favorites);
 
     return (
-      <div className={`page ${favorite.length === 0 ? `page--favorites-empty` : ``}`}>
+      <div className={`page ${favorites.length === 0 ? `page--favorites-empty` : ``}`}>
         <Header/>
         <main
-          className={`page__main page__main--favorites ${favorite.length === 0 ? `page__main--favorites-empty` : ``}`}
+          className={`page__main page__main--favorites ${favorites.length === 0 ? `page__main--favorites-empty` : ``}`}
         >
           <div className="page__favorites-container container">
 
-            {favorite.length === 0 ?
+            {favorites.length === 0 ?
               <FavoritesEmpty /> :
 
-              <FavoritesList offers={favorite} cityNames={uniqueCities}/>
-
+              <FavoritesList offers={favorites} cityNames={uniqueCities}/>
             }
           </div>
         </main>
@@ -52,13 +51,12 @@ class FavoritesScreen extends PureComponent {
 
 
 FavoritesScreen.propTypes = {
-  favorite: PropTypes.array.isRequired,
+  favorites: PropTypes.array.isRequired,
   loadFavoriteAction: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  favorite: getFavorite(state),
-
+  favorites: getFavorite(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

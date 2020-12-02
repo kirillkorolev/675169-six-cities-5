@@ -5,7 +5,6 @@ const FavoritesPlace = (props) => {
   const {offer} = props;
   const {image, price, title, type, isFavorite, rating} = offer;
 
-
   return (
     <article className="favorites__card place-card">
       <div className="favorites__image-wrapper place-card__image-wrapper">

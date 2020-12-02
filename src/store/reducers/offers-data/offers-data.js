@@ -6,7 +6,7 @@ const initialState = {
   nearby: [],
   reviews: [],
   currentOffer: {},
-  favorite: [],
+  favorites: [],
 };
 
 const offersData = (state = initialState, action) => {
@@ -26,9 +26,9 @@ const offersData = (state = initialState, action) => {
         reviews: action.payload,
       });
 
-    case ActionType.LOAD_FAVORITE:
+    case ActionType.LOAD_FAVORITES:
       return extend(state, {
-        favorite: action.payload,
+        favorites: action.payload,
       });
 
     case ActionType.SET_NEW_REVIEW:
@@ -40,7 +40,7 @@ const offersData = (state = initialState, action) => {
       return extend(state, {
         offers: replaceItem(state.offers, action.payload.id, action.payload),
         nearOffers: replaceItem(state.nearby, action.payload.id, action.payload),
-        favorite: replaceItem(state.favorite, action.payload.id, action.payload),
+        favorites: Array.from(new Set(replaceItem(state.favorites, action.payload.id, action.payload))),
       });
   }
 

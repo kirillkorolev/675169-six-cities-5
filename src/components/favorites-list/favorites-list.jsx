@@ -13,7 +13,7 @@ const FavoritesList = (props) => {
 
         {cityNames.map((item) => (
           <FavoritesItem
-            key={item + Math.random()}
+            key={item + item.id}
             cityName={item}
             offers={offers.filter((offer) => offer.cityName === item)}
           />

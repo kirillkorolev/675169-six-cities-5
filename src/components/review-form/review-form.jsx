@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const ReviewForm = (props) => {
-  const {onSubmitAction, onHandleFieldChange} = props;
+  const {onSubmitAction, onHandleFieldChange, review, rating} = props;
 
   return (
     <form className="reviews__form form" action="#" method="post"
@@ -16,6 +16,7 @@ const ReviewForm = (props) => {
           id="5-stars"
           type="radio"
           onChange={onHandleFieldChange}
+          checked={`5` === rating}
         />
         <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
           <svg className="form__star-image" width="37" height="33">
@@ -28,6 +29,7 @@ const ReviewForm = (props) => {
           id="4-stars"
           type="radio"
           onChange={onHandleFieldChange}
+          checked={`4` === rating}
         />
         <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
           <svg className="form__star-image" width="37" height="33">
@@ -40,6 +42,7 @@ const ReviewForm = (props) => {
           id="3-stars"
           type="radio"
           onChange={onHandleFieldChange}
+          checked={`3` === rating}
         />
         <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
           <svg className="form__star-image" width="37" height="33">
@@ -52,6 +55,7 @@ const ReviewForm = (props) => {
           id="2-stars"
           type="radio"
           onChange={onHandleFieldChange}
+          checked={`2` === rating}
         />
         <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
           <svg className="form__star-image" width="37" height="33">
@@ -64,6 +68,7 @@ const ReviewForm = (props) => {
           id="1-star"
           type="radio"
           onChange={onHandleFieldChange}
+          checked={`1` === rating}
         />
         <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
           <svg className="form__star-image" width="37" height="33">
@@ -76,6 +81,7 @@ const ReviewForm = (props) => {
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={onHandleFieldChange}
+        value={review}
       >
       </textarea>
       <div className="reviews__button-wrapper">
@@ -97,6 +103,8 @@ ReviewForm.propTypes = {
   onSubmitAction: PropTypes.func.isRequired,
   onHandleFieldChange: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
+  review: PropTypes.string.isRequired,
+  rating: PropTypes.string.isRequired,
 };
 
 export default ReviewForm;

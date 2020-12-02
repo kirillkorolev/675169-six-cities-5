@@ -11,7 +11,7 @@ const withReviewForm = (Component) => {
       super(props);
 
       this.state = {
-        rating: ``,
+        rating: `0`,
         review: ``,
         formValidation: false,
       };
@@ -34,10 +34,15 @@ const withReviewForm = (Component) => {
 
       this.postReviewAction(this.state, this.props.id);
 
-      this.setState({
-        rating: ``,
-        review: ``,
-        formValidation: false,
+      this.setState(() => {
+
+        return (
+          {
+            rating: ``,
+            review: ``,
+            formValidation: false,
+          }
+        );
       });
     }
 
@@ -56,6 +61,9 @@ const withReviewForm = (Component) => {
           {...this.props}
           onSubmitAction={this.handleSubmit}
           onHandleFieldChange={this.handleFieldChange}
+
+          rating={this.state.rating}
+          review={this.state.review}
         >
         </Component>
       );

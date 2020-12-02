@@ -25,3 +25,10 @@ export const APIRoute = {
   LOGIN: `/login`,
   FAVORITE: `/favorite`,
 };
+
+export const IconRoute = {
+  BLUE: `/img/pin.svg`,
+  ORANGE: `/img/pin-active.svg`,
+};
+
+export const IconSize = [30, 30];
