@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Should FavoriteEmpty render correctly 1`] = `
+Array [
+  <li
+    className="locations__item"
+  >
+    <a
+      className="locations__item-link tabs__item   "
+      href="#"
+      onClick={[Function]}
+    >
+      <span>
+        Paris
+      </span>
+    </a>
+  </li>,
+  <li
+    className="locations__item"
+  >
+    <a
+      className="locations__item-link tabs__item   "
+      href="#"
+      onClick={[Function]}
+    >
+      <span>
+        London
+      </span>
+    </a>
+  </li>,
+  <li
+    className="locations__item"
+  >
+    <a
+      className="locations__item-link tabs__item   "
+      href="#"
+      onClick={[Function]}
+    >
+      <span>
+        Moscow
+      </span>
+    </a>
+  </li>,
+]
+`;

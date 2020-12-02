@@ -10,14 +10,10 @@ import {requireAuthorization} from "./store/action";
 
 import {AuthorizationStatus} from "./const";
 
-// import offers from "./mocks/offers";
-
 import App from "./components/app/app";
 
 import thunk from "redux-thunk";
 import {createAPI} from "./services/api";
-
-// import {ActionCreator} from "./store/action";
 import {fetchHotelsList, checkAuth} from "./store/api-actions";
 
 import {redirect} from "./store/middlewares/redirect";

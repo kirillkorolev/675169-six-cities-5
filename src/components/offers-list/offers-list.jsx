@@ -31,8 +31,6 @@ OffersList.propTypes = {
   cardClass: PropTypes.string.isRequired,
 };
 
-// export default OffersList;
-
 const mapStateToProps = (state) => ({
   hoveredId: getHoveredId(state),
 });
